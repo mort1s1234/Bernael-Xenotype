@@ -52,7 +52,7 @@
 			</li>
 		</renderNodeProperties>
 		<modExtensions>
-			<li Class="VEF.Genes.GeneExtension">
+			<li MayRequire="OskarPotocki.VanillaFactionsExpanded.Core" Class="VEF.Genes.GeneExtension">
 				<useSkinColorForFur>true</useSkinColorForFur>
 				<furHidesBody>true</furHidesBody>
 			</li>
@@ -306,6 +306,26 @@
 	</GeneDef>
 	
 	<!-- ====Archo==== -->
+	
+	<GeneDef>
+		<defName>BX_AbyssalReach</defName>
+		<label>Abyssal Reach</label>
+		<description>Carriers of this gene can project their psychic influence farther, increasing the range of all psycast abilities by 25%.</description>
+		<geneClass>Gene</geneClass>
+		<biostatCpx>2</biostatCpx>
+		<biostatMet>0</biostatMet>
+		<biostatArc>1</biostatArc>
+		<displayCategory>BX_DarkEnergy</displayCategory>
+		<displayOrderInCategory>-5</displayOrderInCategory>
+		<iconPath>UI/Icons/Genes/Gene_EnhancedPsychicAbility</iconPath>
+		<modExtensions>
+			<li MayRequire="OskarPotocki.VanillaFactionsExpanded.Core" Class="VEF.Genes.GeneExtension">
+				<backgroundPathXenogenes>UI/Icons/Genes/BX_XenogenesSoul</backgroundPathXenogenes>
+				<backgroundPathEndogenes>UI/Icons/Genes/BX_XenogenesSoul</backgroundPathEndogenes>
+				<backgroundPathArchite>UI/Icons/Genes/BX_XenogenesSoul</backgroundPathArchite>
+			</li>
+		</modExtensions>
+	</GeneDef>
 	
 	<GeneDef>
 		<defName>BX_Mastermind</defName>

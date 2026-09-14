@@ -10,6 +10,7 @@
 	<inheritable>true</inheritable>
 	<genes>
 		<li>BX_Mastermind</li>
+		<li>BX_AbyssalReach</li>
 		<li>BX_Nihilism</li>
 		<li>BX_Hexmaster</li>
 		<li>BX_NourishingDarkness</li>

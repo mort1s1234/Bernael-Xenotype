@@ -17,6 +17,7 @@ namespace Bernael_Xenotype
         }
 
         public static GeneDef BX_DarkSpeech;
+        public static GeneDef BX_AbyssalReach;
         public static GeneDef BX_DepravedHead;
         public static TaleDef BX_ConsumedGrace;
         public static XenotypeDef BX_Bernael;
