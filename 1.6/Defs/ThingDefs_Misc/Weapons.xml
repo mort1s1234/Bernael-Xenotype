@@ -8,15 +8,15 @@
         <graphicData>
             <texPath>Things/Weapons/Lantern/Lantern</texPath>
             <graphicClass>Graphic_Single</graphicClass>
-		</graphicData>
+	    </graphicData>
         <soundInteract>Interact_BeatFire</soundInteract>
 		 <techLevel>Spacer</techLevel>
         <statBases>
-            <WorkToMake>25000</WorkToMake>
+            <WorkToMake>30000</WorkToMake>
             <Mass>3.5</Mass>
-            <AccuracyTouch>0.80</AccuracyTouch>
-			<AccuracyShort>0.75</AccuracyShort>
-            <AccuracyMedium>0.60</AccuracyMedium>
+            <AccuracyTouch>0.72</AccuracyTouch>
+	        <AccuracyShort>0.68</AccuracyShort>
+            <AccuracyMedium>0.64</AccuracyMedium>
             <AccuracyLong>0.40</AccuracyLong>
             <RangedWeapon_Cooldown>2.0</RangedWeapon_Cooldown>
 		 </statBases>
@@ -34,9 +34,9 @@
         </costList>
         <recipeMaker>
 		<researchPrerequisites>
-				<li MayRequire="VanillaPsycastsExpanded">VPE_CasterGear</li>
-				<li>Fabrication</li>
-			</researchPrerequisites>
+			<li MayRequire="VanillaPsycastsExpanded">VPE_CasterGear</li>
+			<li>Fabrication</li>
+		</researchPrerequisites>
             <recipeUsers>
                 <li>FabricationBench</li>
             </recipeUsers>
@@ -49,16 +49,19 @@
 		<li>RewardSpecial</li>	
 		</thingSetMakerTags>
 
-        <verbs>
-            <li>
-                <verbClass>Verb_Shoot</verbClass>
-                <hasStandardCommand>true</hasStandardCommand>
-                <defaultProjectile>BX_SoulProj</defaultProjectile>
-                <warmupTime>1.5</warmupTime>
-                <range>25.9</range>
-                <soundCast>BX_Lantern_Cast</soundCast> <muzzleFlashScale>9</muzzleFlashScale>
-            </li>
-        </verbs>
+		<verbs>
+			<li>
+				<verbClass>Verb_Shoot</verbClass>
+				<hasStandardCommand>true</hasStandardCommand>
+				<defaultProjectile>BX_SoulProj</defaultProjectile>
+				<warmupTime>2</warmupTime>
+				<range>29.5</range>
+				<burstShotCount>5</burstShotCount>
+				<ticksBetweenBurstShots>20</ticksBetweenBurstShots>
+				<soundCast>BX_Lantern_Cast</soundCast>
+				<muzzleFlashScale>9</muzzleFlashScale>
+			</li>
+		</verbs>
 
         <tools>
             <li>
@@ -78,27 +81,36 @@
             </li>
         </tools>
         
-        <comps>
-            <li Class="CompProperties_Glower">
-                <glowColor>(100, 200, 255, 0)</glowColor>
-                <glowRadius>3</glowRadius>
-            </li>
-        </comps>
+		<comps>
+			<li Class="CompProperties_Glower">
+				<glowColor>(100, 200, 255, 0)</glowColor>
+				<glowRadius>2</glowRadius>
+			</li>
+			<li Class="Bernael_Xenotype.CompProperties_EquippedSoulLanternGlow" />
+		</comps>
     </ThingDef>
 
-    <ThingDef ParentName="BaseProjectileNeolithic">
-        <defName>BX_SoulProj</defName>
-        <label>soul bolt</label>
-        <graphicData>
-            <texPath>Things/Projectile/Soul_Proj</texPath>
-            <graphicClass>Graphic_Single</graphicClass>
-        </graphicData>
-        <projectile>
-            <damageDef>Burn</damageDef> 
-			<damageAmountBase>18</damageAmountBase>
-            <stoppingPower>1.5</stoppingPower> 
-			<armorPenetrationBase>0.50</armorPenetrationBase> 
-			<speed>30</speed> 
+	<ThingDef ParentName="BaseProjectileNeolithic">
+		<defName>BX_SoulProj</defName>
+		<label>soul bolt</label>
+		<thingClass>Bernael_Xenotype.Projectile_SoulLantern</thingClass>
+		<graphicData>
+			<texPath>Things/Projectile/Soul_Proj</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<modExtensions>
+			<li Class="Bernael_Xenotype.SoulLanternProjectileExtension">
+				<maxRetargets>1</maxRetargets>
+				<retargetOnDowned>true</retargetOnDowned>
+				<visualArcAmplitude>1.1</visualArcAmplitude>
+			</li>
+		</modExtensions>
+		<projectile>
+            <damageDef>Burn</damageDef>
+			<damageAmountBase>9</damageAmountBase>
+			<stoppingPower>1.2</stoppingPower>
+			<armorPenetrationBase>0.35</armorPenetrationBase>
+			<speed>20</speed>
 			</projectile>
     </ThingDef>
 </Defs>
