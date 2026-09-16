@@ -1,5 +1,4 @@
-﻿using EBSGFramework;
-using HarmonyLib;
+﻿using HarmonyLib;
 using RimWorld;
 using Verse;
 
@@ -12,8 +11,7 @@ namespace Bernael_Xenotype
             base.Notify_IngestedThing(thing, numTaken);
             if (!ModsConfig.IsActive("Sov.Nephilim") || pawn.health == null || pawn?.genes?.GetGene(BernaelDefOf.GS_Grace_New) != null) return;
             
-            IngestionOutcomeDoer_OffsetResource outcomeDoer_OffsetResource = (IngestionOutcomeDoer_OffsetResource)thing.def.GetGraceOutcomeDoer();
-            if (outcomeDoer_OffsetResource == null) return;
+            if (thing.def.GetGraceOutcomeDoer() == null) return;
 
             Hediff hediff = pawn.health.hediffSet.GetFirstHediffOfDef(BernaelDefOf.BX_Mutation_Hediff);
             if (hediff != null) return;

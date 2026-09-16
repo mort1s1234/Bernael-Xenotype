@@ -1,5 +1,4 @@
-﻿using EBSGFramework;
-using RimWorld;
+﻿using RimWorld;
 using Verse;
 
 namespace Bernael_Xenotype
@@ -27,8 +26,7 @@ namespace Bernael_Xenotype
             base.Notify_IngestedThing(thing, amount);
             if (!available || !ModsConfig.IsActive("Sov.Nephilim")) return;
 
-            IngestionOutcomeDoer_OffsetResource ingestionOutcome = (IngestionOutcomeDoer_OffsetResource)thing.def.GetGraceOutcomeDoer();
-            if (ingestionOutcome == null) return;
+            if (thing.def.GetGraceOutcomeDoer() == null) return;
 
             available = false;
             cooldown = 60000;
