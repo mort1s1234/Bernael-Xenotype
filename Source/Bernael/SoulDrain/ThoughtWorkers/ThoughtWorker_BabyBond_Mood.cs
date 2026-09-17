@@ -12,7 +12,7 @@ namespace Bernael_Xenotype
         private const float Neutral = 0.60f;
         private const float Content = 0.80f;
 
-        public override ThoughtState CurrentStateInternal(Pawn feeder)
+        protected override ThoughtState CurrentStateInternal(Pawn feeder)
         {
             HediffComp_BabyBond_Feeder hediffComp = BabyBondUtility.GetFeederComp(feeder);
             if (hediffComp == null || hediffComp.BondedBabies.Count == 0)

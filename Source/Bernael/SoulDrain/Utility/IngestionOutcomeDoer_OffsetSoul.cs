@@ -6,7 +6,7 @@ namespace Bernael_Xenotype
 {
     public class IngestionOutcomeDoer_OffsetSoul : IngestionOutcomeDoer
     {
-        public override void DoIngestionOutcomeSpecial(Pawn pawn, Thing ingested, int ingestedCount)
+        protected override void DoIngestionOutcomeSpecial(Pawn pawn, Thing ingested, int ingestedCount)
         {
             Utility.OffsetSoul(pawn, offset * ingestedCount);
         }

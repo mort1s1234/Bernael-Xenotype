@@ -118,7 +118,7 @@ namespace Bernael_Xenotype
             DevelopmentalStage? developmentStage = victim.ageTracker?.CurLifeStage?.developmentalStage;
             if (developmentStage is not (DevelopmentalStage.Baby or DevelopmentalStage.Newborn)) return false;
 
-            XenotypeDef targetXenotype = drainer.genes.xenotype;
+            XenotypeDef targetXenotype = drainer.genes.Xenotype;
             victim.genes.xenotypeName = drainer.genes.xenotypeName;
             victim.genes.iconDef = drainer.genes.iconDef;
             victim.genes.SetXenotypeDirect(targetXenotype);
@@ -128,7 +128,7 @@ namespace Bernael_Xenotype
                 victim.genes.AddGene(gene, xenogene: true);
             }
             List<DirectPawnRelation> relationsToRemove = [];
-            List<DirectPawnRelation> relationList = victim.relations.directRelations;
+            List<DirectPawnRelation> relationList = victim.relations.DirectRelations;
             foreach (DirectPawnRelation relations in relationList)
             {
                 if (relations.def.familyByBloodRelation)
@@ -144,7 +144,7 @@ namespace Bernael_Xenotype
             }
             foreach (DirectPawnRelation item in relationsToRemove)
             {
-                victim.relations.directRelations.Remove(item);
+                victim.relations.RemoveDirectRelation(item);
             }
 
             BabyBondUtility.EstablishBond(drainer, victim);

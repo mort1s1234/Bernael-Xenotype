@@ -183,7 +183,7 @@ namespace Bernael_Xenotype
             }
         }
 
-        public override void TickInterval(int delta)
+        protected override void TickInterval(int delta)
         {
             if (!visualTrackingEnabled)
             {
@@ -224,7 +224,7 @@ namespace Bernael_Xenotype
             AdvanceProjectile(delta, currentPosition);
         }
 
-        public override void DrawAt(Vector3 drawLoc, bool flip = false)
+        protected override void DrawAt(Vector3 drawLoc, bool flip = false)
         {
             base.DrawAt(drawLoc + VisualArcOffset, flip);
         }

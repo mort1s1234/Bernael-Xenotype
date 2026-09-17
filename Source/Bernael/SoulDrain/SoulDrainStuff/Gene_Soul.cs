@@ -22,9 +22,9 @@ namespace Bernael_Xenotype
 
         public override float MaxLevelOffset => 0.1f;
 
-        public override Color BarColor => new ColorInt(118, 87, 145).ToColor;
+        protected override Color BarColor => new ColorInt(118, 87, 145).ToColor;
 
-        public override Color BarHighlightColor => new ColorInt(99, 64, 114).ToColor;
+        protected override Color BarHighlightColor => new ColorInt(99, 64, 114).ToColor;
 
         public override void PostAdd()
         {

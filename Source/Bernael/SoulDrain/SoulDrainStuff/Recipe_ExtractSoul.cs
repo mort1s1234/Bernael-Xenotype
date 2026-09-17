@@ -86,7 +86,7 @@ namespace Bernael_Xenotype
 			}
 		}
 
-		public override void OnSurgerySuccess(Pawn pawn, BodyPartRecord part, Pawn billDoer, List<Thing> ingredients, Bill bill)
+		protected override void OnSurgerySuccess(Pawn pawn, BodyPartRecord part, Pawn billDoer, List<Thing> ingredients, Bill bill)
 		{
 			if (!GenPlace.TryPlaceThing(ThingMaker.MakeThing(BernaelDefOf.BX_BottledSoul), pawn.PositionHeld, pawn.MapHeld, ThingPlaceMode.Near))
 			{

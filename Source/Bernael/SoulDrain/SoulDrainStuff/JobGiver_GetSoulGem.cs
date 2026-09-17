@@ -68,7 +68,7 @@ namespace Bernael_Xenotype
             return genes?.GetFirstGeneOfType<Gene_Soul>() == null ? 0f : 9.1f;
         }
 
-        public override Job TryGiveJob(Pawn pawn)
+        protected override Job TryGiveJob(Pawn pawn)
         {
             if (!ModsConfig.BiotechActive)
             {

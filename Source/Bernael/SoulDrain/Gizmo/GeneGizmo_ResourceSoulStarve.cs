@@ -57,7 +57,7 @@ namespace Bernael_Xenotype
             return result;
         }
 
-        public override void DrawHeader(Rect headerRect, ref bool mouseOverElement)
+        protected override void DrawHeader(Rect headerRect, ref bool mouseOverElement)
         {
             Gene_Soul soulGene;
             if (IsDraggable && (soulGene = (gene as Gene_Soul)) != null)
@@ -88,7 +88,7 @@ namespace Bernael_Xenotype
             }
             base.DrawHeader(headerRect, ref mouseOverElement);
         }
-        public override bool DraggingBar
+        protected override bool DraggingBar
         {
             get
             {
@@ -100,7 +100,7 @@ namespace Bernael_Xenotype
             }
         }
 
-        public override string GetTooltip()
+        protected override string GetTooltip()
         {
             tmpDrainGenes.Clear();
             string text = string.Format("{0}: {1} / {2}\n", gene.ResourceLabel.CapitalizeFirst().Colorize(ColoredText.TipSectionTitleColor), gene.ValueForDisplay, gene.MaxForDisplay);

@@ -22,7 +22,7 @@ namespace Bernael_Xenotype
             return pawn.Reserve(job.targetA, job, 1, -1, null, errorOnFailed);
         }
 
-        public override IEnumerable<Toil> MakeNewToils()
+        protected override IEnumerable<Toil> MakeNewToils()
         {
             this.FailOnDespawnedOrNull(TargetIndex.A);
             this.FailOn(() => !Prisoner.IsPrisonerOfColony || !Prisoner.guest.PrisonerIsSecure || Prisoner.InAggroMentalState || Prisoner.guest.IsInteractionDisabled(PrisonerInteractionModeDefOf.Bloodfeed));
