@@ -4,7 +4,7 @@ namespace Bernael_Xenotype
 {
     public class Gene_Hediff : Gene
     {
-        Gene_AddHediff ModExt => def.GetModExtension<Gene_AddHediff>();
+        GeneAddHediffExtension ModExt => def.GetModExtension<GeneAddHediffExtension>();
 
         public override void PostAdd()
         {

@@ -23,7 +23,7 @@
     <WorkGiverDef>
         <defName>Bernael_FeedSoulgem</defName>
         <label>administer soulgem</label>
-        <giverClass>Bernael_Xenotype.Workgiver_AdministerSoul</giverClass>
+        <giverClass>Bernael_Xenotype.WorkGiver_AdministerSoulGem</giverClass>
         <workType>Doctor</workType>
         <verb>administer soulgem to</verb>
         <gerund>administering soulgem to</gerund>

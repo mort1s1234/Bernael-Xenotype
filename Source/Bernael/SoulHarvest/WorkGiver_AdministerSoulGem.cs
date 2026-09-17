@@ -4,7 +4,7 @@ using Verse.AI;
 
 namespace Bernael_Xenotype
 {
-    public class Workgiver_AdministerSoul : WorkGiver_Scanner
+    public class WorkGiver_AdministerSoulGem : WorkGiver_Scanner
     {
         public override ThingRequest PotentialWorkThingRequest => ThingRequest.ForGroup(ThingRequestGroup.Pawn);
 

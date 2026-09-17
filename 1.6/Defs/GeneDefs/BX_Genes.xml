@@ -157,7 +157,7 @@
 		<iconPath>UI/Icons/Genes/BX_WitheredSoul</iconPath>
 		<geneClass>Bernael_Xenotype.Gene_Hediff</geneClass>
 		<modExtensions>
-			<li Class="Bernael_Xenotype.Gene_AddHediff">
+			<li Class="Bernael_Xenotype.GeneAddHediffExtension">
 				<hediffsToAdd>
 					<li>BX_WitheredSoulHediff</li>
 				</hediffsToAdd>
@@ -177,7 +177,7 @@
 		<displayOrderInCategory>438</displayOrderInCategory>
 		<iconPath>UI/Icons/Genes/BX_Darkeater</iconPath>
 		<modExtensions>
-			<li Class="Bernael_Xenotype.Gene_AddHediff">
+			<li Class="Bernael_Xenotype.GeneAddHediffExtension">
 				<hediffsToAdd>
 					<li>BX_Gene_NourishingDarkness_Hediff</li>
 				</hediffsToAdd>
@@ -212,7 +212,7 @@
 		<displayOrderInCategory>60</displayOrderInCategory>
 		<iconPath>UI/Icons/Genes/BX_ReapersEcstasy</iconPath>
 		<modExtensions>
-			<li Class="Bernael_Xenotype.Gene_AddHediff">
+			<li Class="Bernael_Xenotype.GeneAddHediffExtension">
 				<hediffsToAdd>
 					<li>BX_ReaperEcstasy</li>
 				</hediffsToAdd>
