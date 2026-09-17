@@ -1,0 +1,25 @@
+# Build intermediates and secondary output.
+# The shipped assembly lives in 1.6/Assemblies and IS tracked; everything
+# MSBuild produces on the way there is machine-specific and is not.
+[Bb]in/
+[Oo]bj/
+*.cache
+*.FileListAbsolute.txt
+
+# NuGet restore output
+project.assets.json
+*.nuget.g.props
+*.nuget.g.targets
+*.nuget.dgspec.json
+
+# IDE and per-user settings (contain absolute paths of the local install)
+.vs/
+.idea/
+*.user
+*.suo
+*.userprefs
+
+# OS clutter
+Thumbs.db
+desktop.ini
+.DS_Store
