@@ -30,7 +30,7 @@ namespace Bernael_Xenotype
             yield return Toils_General.WaitWith(TargetIndex.A, WaitTicks, useProgressBar: true).PlaySustainerOrSound(SoundDefOf.Bloodfeed_Cast);
             yield return Toils_General.Do(delegate
             {
-                Utility.DoDrain(pawn, Prisoner, HemogenGain, VictimResistance, BernaelUtility.cachedSoulDrainedHediff, BloodLoss, BernaelDefOf.BX_FedOn, BernaelDefOf.BX_FedOn_Social);
+                SoulUtility.DoDrain(pawn, Prisoner, HemogenGain, VictimResistance, BernaelUtility.cachedSoulDrainedHediff, BloodLoss, BernaelDefOf.BX_FedOn, BernaelDefOf.BX_FedOn_Social);
             });
             yield return Toils_Interpersonal.SetLastInteractTime(TargetIndex.A);
         }

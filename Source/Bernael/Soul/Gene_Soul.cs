@@ -64,14 +64,14 @@ namespace Bernael_Xenotype
             }
             if (flag)
             {
-                Utility.OffsetSoul(pawn, 0.0375f * thing.GetStatValue(StatDefOf.Nutrition) * numTaken);
+                SoulUtility.OffsetSoul(pawn, 0.0375f * thing.GetStatValue(StatDefOf.Nutrition) * numTaken);
             }
         }
 
         public override void TickInterval(int delta)
         {
             base.TickInterval(delta);
-            Utility.TickResourceDrainInterval(this, delta);
+            SoulUtility.TickResourceDrainInterval(this, delta);
         }
 
         public override void SetTargetValuePct(float val)
@@ -94,7 +94,7 @@ namespace Bernael_Xenotype
             {
                 yield return gizmo;
             }
-            foreach (Gizmo gizmo2 in Utility.GetResourceDrainGizmos(this))
+            foreach (Gizmo gizmo2 in SoulUtility.GetResourceDrainGizmos(this))
             {
                 yield return gizmo2;
             }

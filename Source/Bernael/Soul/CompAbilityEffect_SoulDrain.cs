@@ -15,11 +15,11 @@ namespace Bernael_Xenotype
             {
                 return;
             }
-            if (Utility.TryConvertBaby(parent.pawn, pawn))
+            if (SoulUtility.TryConvertBaby(parent.pawn, pawn))
             {
                 return;
             }
-            Utility.DoDrain(parent.pawn, pawn, Props.soulGain, Props.resistanceGain, Props.hediffToGiveTarget, Props.hediffSeverity, Props.thoughtDefToGiveTarget, Props.opinionThoughtDefToGiveTarget);
+            SoulUtility.DoDrain(parent.pawn, pawn, Props.soulGain, Props.resistanceGain, Props.hediffToGiveTarget, Props.hediffSeverity, Props.thoughtDefToGiveTarget, Props.opinionThoughtDefToGiveTarget);
         }
 
         public override bool CanApplyOn(LocalTargetInfo target, LocalTargetInfo dest)

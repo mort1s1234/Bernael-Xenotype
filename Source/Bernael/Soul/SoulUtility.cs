@@ -4,7 +4,7 @@ using UnityEngine;
 using Verse;
 namespace Bernael_Xenotype
 {
-    public class Utility
+    public static class SoulUtility
     {
         public static void TickResourceDrainInterval(IGeneResourceDrain drain, int delta)
         {

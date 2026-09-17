@@ -8,7 +8,7 @@ namespace Bernael_Xenotype
     {
         protected override void DoIngestionOutcomeSpecial(Pawn pawn, Thing ingested, int ingestedCount)
         {
-            Utility.OffsetSoul(pawn, offset * ingestedCount);
+            SoulUtility.OffsetSoul(pawn, offset * ingestedCount);
         }
 
         public override IEnumerable<StatDrawEntry> SpecialDisplayStats(ThingDef parentDef)

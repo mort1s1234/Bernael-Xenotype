@@ -70,7 +70,7 @@ namespace Bernael_Xenotype
 				Messages.Message("MessagePawnHadNotEnoughBloodToProduceHemogenPack".Translate(pawn.Named("PAWN")), pawn, MessageTypeDefOf.NeutralEvent);
 				return;
 			}
-			if (Utility.TryConvertBaby(pawn, billDoer))
+			if (SoulUtility.TryConvertBaby(pawn, billDoer))
 			{
 				return;
 			}

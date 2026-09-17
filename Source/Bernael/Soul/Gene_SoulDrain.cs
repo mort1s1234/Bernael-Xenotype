@@ -30,7 +30,7 @@ namespace Bernael_Xenotype
         public override void TickInterval(int delta)
         {
             base.TickInterval(delta);
-            Utility.TickResourceDrainInterval(this, delta);
+            SoulUtility.TickResourceDrainInterval(this, delta);
         }
 
         public override IEnumerable<Gizmo> GetGizmos()
@@ -39,7 +39,7 @@ namespace Bernael_Xenotype
             {
                 yield break;
             }
-            foreach (Gizmo gizmo in Utility.GetResourceDrainGizmos(this))
+            foreach (Gizmo gizmo in SoulUtility.GetResourceDrainGizmos(this))
             {
                 yield return gizmo;
             }

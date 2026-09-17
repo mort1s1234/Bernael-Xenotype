@@ -25,7 +25,7 @@ namespace Bernael_Xenotype
         public override void Apply(LocalTargetInfo target, LocalTargetInfo dest)
         {
             base.Apply(target, dest);
-            Utility.OffsetSoul(parent.pawn, -Props.soulCost);
+            SoulUtility.OffsetSoul(parent.pawn, -Props.soulCost);
         }
 
         public override bool GizmoDisabled(out string reason)
