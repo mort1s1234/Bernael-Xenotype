@@ -1,19 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using RimWorld;
 using Verse;
 
 namespace Bernael_Xenotype
 {
-    public class ReaperModExt : DefModExtension
-    {
-        public float killRefillPct = 1;
-        public int decayTickInterval = 60;
-    }
-
     public class Hediff_ReapersEcstasy : HediffWithComps
     {
         public ReaperModExt ModExt => this.def.GetModExtension<ReaperModExt>();

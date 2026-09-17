@@ -1,23 +1,11 @@
-﻿using HarmonyLib;
+using HarmonyLib;
 using RimWorld;
 using Verse;
 
 namespace Bernael_Xenotype
 {
-    [HarmonyPatch(typeof(Bill_Medical), "PawnAllowedToStartAnew")]
-    public static class BillMedical_PawnAllowedToStartAnew
-    {
-        static void Postfix(Bill_Medical __instance, Pawn pawn, ref bool __result)
-        {
-            if (!__result) return;
-            if (__instance.recipe == BernaelDefOf.BX_ExtractSoul)
-            {
-                __result = pawn.genes?.HasActiveGene(BernaelDefOf.BX_SoulStarved) ?? false;
-            }
-        }
-    }
     [HarmonyPatch(typeof(Bill_Medical), "ShouldDoNow")]
-    public static class BillMedical_ShouldDoNow
+    public static class Patch_Bill_Medical_ShouldDoNow
     {
         static void Postfix(Bill_Medical __instance, ref bool __result)
         {
@@ -34,5 +22,4 @@ namespace Bernael_Xenotype
             }
         }
     }
-
 }

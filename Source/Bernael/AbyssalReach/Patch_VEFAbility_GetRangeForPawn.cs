@@ -2,42 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using HarmonyLib;
-using RimWorld;
 using Verse;
 
 namespace Bernael_Xenotype
 {
-    public static class AbyssalReachUtility
-    {
-        public const float RangeFactor = 1.25f;
-
-        public static bool HasActiveGene(Pawn pawn)
-        {
-            Gene gene = pawn?.genes?.GetGene(BernaelDefOf.BX_AbyssalReach);
-            return gene != null && gene.Active;
-        }
-    }
-
-    [HarmonyPatch(typeof(Verb), nameof(Verb.EffectiveRange), MethodType.Getter)]
-    public static class Patch_AbyssalReach_VanillaPsycastRange
-    {
-        public static void Postfix(Verb __instance, ref float __result)
-        {
-            Verb_CastAbility abilityVerb = __instance as Verb_CastAbility;
-            if (abilityVerb?.Ability?.def?.IsPsycast != true)
-            {
-                return;
-            }
-
-            if (AbyssalReachUtility.HasActiveGene(__instance.CasterPawn))
-            {
-                __result *= AbyssalReachUtility.RangeFactor;
-            }
-        }
-    }
-
     [HarmonyPatch]
-    public static class Patch_AbyssalReach_VpePsycastRange
+    public static class Patch_VEFAbility_GetRangeForPawn
     {
         private const string VpePackageId = "VanillaExpanded.VPsycastsE";
         private const string VefAbilityTypeName = "VEF.Abilities.Ability";

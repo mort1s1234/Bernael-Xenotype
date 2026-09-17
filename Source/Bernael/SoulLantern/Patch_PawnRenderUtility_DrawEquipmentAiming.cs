@@ -1,62 +1,11 @@
-using System.Linq;
-using System.Reflection;
-using HarmonyLib;
 using RimWorld;
 using UnityEngine;
 using Verse;
 
 namespace Bernael_Xenotype
 {
-    public class CompProperties_EquippedSoulLanternGlow : CompProperties
-    {
-        public CompProperties_EquippedSoulLanternGlow()
-        {
-            compClass = typeof(CompEquippedSoulLanternGlow);
-            SoulLanternRenderBootstrap.EnsurePatched();
-        }
-    }
-
-    public class CompEquippedSoulLanternGlow : ThingComp
-    {
-    }
-
-    public static class SoulLanternRenderBootstrap
-    {
-        public static void EnsurePatched()
-        {
-            if (initialized)
-            {
-                return;
-            }
-
-            initialized = true;
-            MethodInfo target = AccessTools.Method(
-                typeof(PawnRenderUtility),
-                nameof(PawnRenderUtility.DrawEquipmentAiming));
-            if (target == null)
-            {
-                return;
-            }
-
-            Patches patchInfo = Harmony.GetPatchInfo(target);
-            bool alreadyInstalled = patchInfo?.Prefixes.Any(patch => patch.owner == HarmonyId) == true;
-            if (!alreadyInstalled)
-            {
-                Harmony harmony = new Harmony(HarmonyId);
-                HarmonyMethod prefix = new HarmonyMethod(
-                    typeof(Patch_DrawEquipmentAiming_SoulLanternGlow),
-                    nameof(Patch_DrawEquipmentAiming_SoulLanternGlow.DrawGlow));
-                harmony.Patch(target, prefix: prefix);
-            }
-        }
-
-        private const string HarmonyId = "BernaelXenotype.Harmony.SoulLantern";
-
-        private static bool initialized;
-    }
-
     [StaticConstructorOnStartup]
-    public static class Patch_DrawEquipmentAiming_SoulLanternGlow
+    public static class Patch_PawnRenderUtility_DrawEquipmentAiming
     {
         public static void DrawGlow(Thing eq, Vector3 drawLoc, float aimAngle)
         {
@@ -114,7 +63,7 @@ namespace Bernael_Xenotype
             DrawGlowLayer(glowDrawLoc, InnerGlowSize, InnerGlowMaterial, InnerGlowPasses);
         }
 
-        static Patch_DrawEquipmentAiming_SoulLanternGlow()
+        static Patch_PawnRenderUtility_DrawEquipmentAiming()
         {
             OuterGlowMaterial = MaterialPool.MatFrom(
                 GlowTexturePath,
