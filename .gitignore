@@ -23,3 +23,7 @@ project.assets.json
 Thumbs.db
 desktop.ini
 .DS_Store
+
+# Local rwtest scripts for RimDevKit's test recorder.
+# RimDevKit is not released yet and only exists on this machine.
+Tests/
