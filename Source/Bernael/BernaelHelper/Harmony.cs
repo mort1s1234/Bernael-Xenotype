@@ -30,16 +30,16 @@ namespace Bernael_Xenotype
             [UsedImplicitly]
             private static bool Prepare()
             {
-                return ModsConfig.IsActive("Sov.Nephilim");
+                return ModsConfig.IsActive("Sov.Nephilim") && ModsConfig.IsActive("EBSG.Framework");
             }
 
             static readonly Type type = AccessTools.TypeByName("EBSGFramework.ResourceGene");
-            static readonly FieldInfo geneDef = AccessTools.Field(type, "def");
-            static readonly FieldInfo creature = AccessTools.Field(type, "pawn");
+            static readonly FieldInfo geneDef = type != null ? AccessTools.Field(type, "def") : null;
+            static readonly FieldInfo creature = type != null ? AccessTools.Field(type, "pawn") : null;
 
             public static void Postfix(ref Gene_Resource __instance)
             {
-                if (type == null || __instance.Value > 0) return;
+                if (type == null || geneDef == null || creature == null || __instance.Value > 0) return;
                 Pawn pawn = (Pawn)(creature.GetValue(__instance));
                 if (!pawn.IsHashIntervalTick(180) || !pawn.InMentalState || (GeneDef)(geneDef.GetValue(__instance)) != BernaelDefOf.GS_Grace_New || !typeof(Gene_Resource).IsAssignableFrom(__instance.def.geneClass)) return;
 
