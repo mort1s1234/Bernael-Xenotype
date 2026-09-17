@@ -1,16 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
 <Defs>
-  <TaleDef>
-    <defName>BX_ConsumedGrace</defName>
-    <label>consumed grace</label>
-    <taleClass>Tale_DoublePawn</taleClass>
-    <type>Expirable</type>
-    <!-- <firstPawnSymbol>KILLER</firstPawnSymbol> -->
-    <!-- <secondPawnSymbol>COLONIST</secondPawnSymbol> -->
-    <usableForArt>false</usableForArt>
-    <maxPerPawn>1</maxPerPawn>
-    <expireDays>3</expireDays>
-  </TaleDef>
-
 <ThoughtDef>
 	<defName>BX_ConsumedGrace</defName>
 	<thoughtClass>Thought_Tale</thoughtClass>

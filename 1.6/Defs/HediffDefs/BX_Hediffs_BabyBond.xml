@@ -41,38 +41,4 @@
     </stages>
   </HediffDef>
 
-  <ThoughtDef>
-    <defName>BabyBondMood</defName>
-    <thoughtClass>Thought_Situational</thoughtClass>
-    <workerClass>Bernael_Xenotype.ThoughtWorker_BabyBond_Mood</workerClass>
-    <validWhileDespawned>false</validWhileDespawned>
-    <stages>
-      <li>
-        <label>bonded child is miserable</label>
-        <description>The child I converted is suffering terribly. Their pain echoes through the bond.</description>
-        <baseMoodEffect>-15</baseMoodEffect>
-      </li>
-      <li>
-        <label>bonded child is sad</label>
-        <description>My bonded child is unhappy. I feel their distress.</description>
-        <baseMoodEffect>-8</baseMoodEffect>
-      </li>
-      <li>
-        <label>bonded child is content</label>
-        <description>My bonded child feels neither joy nor sorrow. The bond is quiet.</description>
-        <baseMoodEffect>0</baseMoodEffect>
-      </li>
-      <li>
-        <label>bonded child is happy</label>
-        <description>My bonded child is doing well. Their warmth reaches me through the bond.</description>
-        <baseMoodEffect>5</baseMoodEffect>
-      </li>
-      <li>
-        <label>bonded child is joyful</label>
-        <description>My bonded child radiates joy. The bond fills me with a reflected happiness.</description>
-        <baseMoodEffect>12</baseMoodEffect>
-      </li>
-    </stages>
-  </ThoughtDef>
-
 </Defs>

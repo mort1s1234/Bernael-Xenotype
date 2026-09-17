@@ -15,15 +15,6 @@
 		</forcedHeadTypes>
 	</GeneDef>
 	
-	<HeadTypeDef ParentName="AverageBase">
-		<defName>BX_Depraved</defName>
-		<randomChosen>false</randomChosen>
-		<graphicPath>Parts/Head/DepravedHead</graphicPath>
-		<requiredGenes>
-			<li>BX_DepravedHead</li>
-		</requiredGenes>
-	</HeadTypeDef>
-	
 	<GeneDef>
 		<defName>BX_CravedBody</defName>
 		<label>Craved Body</label>
@@ -58,20 +49,6 @@
 			</li>
 		</modExtensions>
 	</GeneDef>
-	
-	<FurDef>
-		<defName>BX_Craved</defName>
-		<noGraphic>true</noGraphic>
-		<bodyTypeGraphicPaths>
-			<Male>Parts/Body/CravedBody_Male</Male>
-			<Female>Parts/Body/CravedBody_Female</Female>
-			<Hulk>Parts/Body/CravedBody_Hulk</Hulk>
-			<Fat>Parts/Body/CravedBody_Fat</Fat>
-			<Thin>Parts/Body/CravedBody_Thin</Thin>
-			<Child>Parts/Body/CravedBody_Child</Child>
-			<Baby>Parts/Body/CravedBody_Child</Baby>
-		</bodyTypeGraphicPaths>
-	</FurDef>
 	
 	<GeneDef Name="HaloBase">
 		<defName>BX_Profane_Halo</defName>

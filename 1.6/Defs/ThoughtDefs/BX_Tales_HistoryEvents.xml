@@ -6,4 +6,14 @@
         <label>extracted life force from member</label>
     </HistoryEventDef>
 
+    <TaleDef>
+        <defName>BX_ConsumedGrace</defName>
+        <label>consumed grace</label>
+        <taleClass>Tale_DoublePawn</taleClass>
+        <type>Expirable</type>
+        <usableForArt>false</usableForArt>
+        <maxPerPawn>1</maxPerPawn>
+        <expireDays>3</expireDays>
+    </TaleDef>
+
 </Defs>
