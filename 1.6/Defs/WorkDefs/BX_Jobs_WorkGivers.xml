@@ -1,5 +1,11 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <Defs>
+
+    <JobDef>
+        <defName>BX_PrisonerSoulFeed</defName>
+        <driverClass>Bernael_Xenotype.JobDriver_PrisonerSoulFeed</driverClass>
+        <reportString>feeding on TargetA.</reportString>
+    </JobDef>
 
     <WorkGiverDef>
         <defName>Bernael_DeliverSoulgemToPrisoner</defName>
