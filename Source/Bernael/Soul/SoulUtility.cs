@@ -59,6 +59,27 @@ namespace Bernael_Xenotype
             }
         }
 
+        // Vanilla keeps sanguophages off each other through
+        // TargetingParameters.canTargetBloodfeeders, but that flag only asks
+        // GeneUtility.IsBloodfeeder, which looks for GeneDefOf.Bloodfeeder alone.
+        // BX_SoulFeeder is its own GeneDef, so the flag never fires for our kind
+        // and the check has to live here. Carriers count even while the gene is
+        // still inactive (minAgeActive 3), otherwise a Bernael baby would be a
+        // valid target and TryConvertBaby would adopt it into its own xenotype.
+        public static bool IsSoulFeeder(Pawn pawn)
+        {
+            if (!ModsConfig.BiotechActive)
+            {
+                return false;
+            }
+            Pawn_GeneTracker genes = pawn?.genes;
+            if (genes == null)
+            {
+                return false;
+            }
+            return genes.GetGene(BernaelDefOf.BX_SoulStarved) != null || genes.GetGene(BernaelDefOf.BX_SoulFeeder) != null;
+        }
+
         public static void DoDrain(Pawn biter, Pawn victim, float targetSoulGain, float victimResistanceGain, HediffDef hediffToGiveTarget, float victimSoulDrainSeverity = 0.4999f, ThoughtDef thoughtDefToGiveTarget = null, ThoughtDef opinionThoughtToGiveTarget = null)
         {
             if (!ModLister.CheckBiotech("Sanguophage bite"))

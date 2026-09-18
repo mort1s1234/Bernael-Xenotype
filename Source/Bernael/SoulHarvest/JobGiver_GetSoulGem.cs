@@ -128,6 +128,11 @@ namespace Bernael_Xenotype
 
         private static AcceptanceReport CanFeedOnPrisoner(Pawn bloodfeeder, Pawn prisoner)
         {
+            // Same rule as the ability: our own kind is never a source.
+            if (SoulUtility.IsSoulFeeder(prisoner))
+            {
+                return false;
+            }
             if (prisoner.WouldDieFromAdditionalBloodLoss(0.4499f))
             {
                 return "CannotFeedOnWouldKill".Translate(prisoner.Named("PAWN"));

@@ -15,6 +15,10 @@ namespace Bernael_Xenotype
             {
                 return;
             }
+            if (SoulUtility.IsSoulFeeder(pawn))
+            {
+                return;
+            }
             if (SoulUtility.TryConvertBaby(parent.pawn, pawn))
             {
                 return;
@@ -36,6 +40,14 @@ namespace Bernael_Xenotype
             }
             if (!AbilityUtility.ValidateMustBeHumanOrWildMan(pawn, throwMessages, parent))
             {
+                return false;
+            }
+            if (SoulUtility.IsSoulFeeder(pawn))
+            {
+                if (throwMessages)
+                {
+                    Messages.Message("BX_MessageCannotUseOnSoulFeeder".Translate(parent.def.Named("ABILITY")), pawn, MessageTypeDefOf.RejectInput, false);
+                }
                 return false;
             }
             if (pawn.Faction != null && !pawn.IsSlaveOfColony && !pawn.IsPrisonerOfColony)

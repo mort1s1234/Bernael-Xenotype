@@ -36,6 +36,7 @@ namespace Bernael_Xenotype
 
         public static StatDef BX_SoulGainFactor;
         public static GeneDef BX_SoulStarved;
+        public static GeneDef BX_SoulFeeder;
 
         public static ThingDef BX_BottledSoul;
         public static RecipeDef BX_ExtractSoul;
