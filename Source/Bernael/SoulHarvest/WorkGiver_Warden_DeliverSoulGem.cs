@@ -17,12 +17,19 @@ namespace Bernael_Xenotype
                 return null;
             }
             Pawn prisoner = (Pawn)t;
-            if (!prisoner.guest.CanBeBroughtFood || !prisoner.Position.IsInPrisonCell(prisoner.Map))
+            if (!prisoner.guest.CanBeBroughtFood)
             {
+                JobFailReason.Is("MB_SoulgemDeliveryNotAllowed".Translate(prisoner));
+                return null;
+            }
+            if (!prisoner.Position.IsInPrisonCell(prisoner.Map))
+            {
+                JobFailReason.Is("MB_PrisonerNotInCell".Translate(prisoner));
                 return null;
             }
             if (WardenFeedUtility.ShouldBeFed(prisoner))
             {
+                JobFailReason.Is("MB_PrisonerNeedsFoodFirst".Translate(prisoner));
                 return null;
             }
             Pawn_GeneTracker genes = prisoner.genes;
@@ -31,28 +38,31 @@ namespace Bernael_Xenotype
             {
                 return null;
             }
-            if (gene_Soul.soulBasicGemsAllowed)
+            if (!gene_Soul.soulBasicGemsAllowed)
             {
-                if (!gene_Soul.ShouldConsumeSoulNow())
-                {
-                    return null;
-                }
-                if (SoulGemAlreadyAvailableFor(prisoner))
-                {
-                    return null;
-                }
-                Thing thing = GenClosest.ClosestThingReachable(pawn.Position, pawn.Map, ThingRequest.ForDef(BernaelDefOf.BX_BottledSoul), PathEndMode.OnCell, TraverseParms.For(pawn), 9999f, pack => !pack.IsForbidden(pawn) && pawn.CanReserve(pack) && pack.GetRoom() != prisoner.GetRoom());
-                if (thing == null)
-                {
-                    return null;
-                }
-                Job job = JobMaker.MakeJob(JobDefOf.DeliverFood, thing, prisoner);
-                job.count = 1;
-                job.targetC = RCellFinder.SpotToChewStandingNear(prisoner, thing);
-                return job;
+                JobFailReason.Is("MB_NotAllowedSoulgem".Translate());
+                return null;
             }
-            return null;
-
+            if (!gene_Soul.ShouldConsumeSoulNow())
+            {
+                JobFailReason.Is("MB_SoulNotLowEnough".Translate(prisoner));
+                return null;
+            }
+            if (SoulGemAlreadyAvailableFor(prisoner))
+            {
+                JobFailReason.Is("MB_SoulgemAlreadyThere".Translate(prisoner));
+                return null;
+            }
+            Thing thing = GenClosest.ClosestThingReachable(pawn.Position, pawn.Map, ThingRequest.ForDef(BernaelDefOf.BX_BottledSoul), PathEndMode.OnCell, TraverseParms.For(pawn), 9999f, pack => !pack.IsForbidden(pawn) && pawn.CanReserve(pack) && pack.GetRoom() != prisoner.GetRoom());
+            if (thing == null)
+            {
+                JobFailReason.Is("NoIngredient".Translate(BernaelDefOf.BX_BottledSoul));
+                return null;
+            }
+            Job job = JobMaker.MakeJob(JobDefOf.DeliverFood, thing, prisoner);
+            job.count = 1;
+            job.targetC = RCellFinder.SpotToChewStandingNear(prisoner, thing);
+            return job;
         }
 
         private bool SoulGemAlreadyAvailableFor(Pawn prisoner)

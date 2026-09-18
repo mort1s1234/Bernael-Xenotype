@@ -14,6 +14,11 @@
 
     <MB_AlertLowSoulEnergy>Low soul saturation</MB_AlertLowSoulEnergy>
     <MB_AlertLowSoulEnergyDesc>These soul eaters are running out of soul saturation. Give them a bottled soul essence or let them drain someone</MB_AlertLowSoulEnergyDesc>
+    <MB_SoulgemDeliveryNotAllowed>{0} is not set to be brought food.</MB_SoulgemDeliveryNotAllowed>
+    <MB_PrisonerNotInCell>{0} is not in a prison cell.</MB_PrisonerNotInCell>
+    <MB_PrisonerNeedsFoodFirst>{0} needs food before a bottled soul.</MB_PrisonerNeedsFoodFirst>
+    <MB_SoulNotLowEnough>{0} does not want a bottled soul yet.</MB_SoulNotLowEnough>
+    <MB_SoulgemAlreadyThere>{0} can already reach a bottled soul.</MB_SoulgemAlreadyThere>
     <MB_NotAllowedSoulgem>Consuming bottled souls is switched off for this person.</MB_NotAllowedSoulgem>
     <MB_AutoTakeSoulDesc>Automatically consume a bottled soul essence whenever {PAWN_nameDef}'s soul saturation falls below {MIN}.\n\nCurrently {ONOFF}.</MB_AutoTakeSoulDesc>
 
