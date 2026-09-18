@@ -20,7 +20,7 @@ namespace Bernael_Xenotype
             if (ModExt == null || !victim.HostileTo(pawn.Faction) || pawn?.genes?.GetGene(BernaelDefOf.BX_SoulStarved) == null) return;
             Gene_Soul gene_Soul = (Gene_Soul)pawn.genes.GetGene(BernaelDefOf.BX_SoulStarved);
 
-            gene_Soul.ValuePercent += ModExt.killRefillPct;
+            gene_Soul.ValuePercent += ModExt.killRefillPct / 100f;
             this.Severity += 1;
         }
 

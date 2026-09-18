@@ -28,7 +28,7 @@ namespace Bernael_Xenotype
         {
             targets.Clear();
             targetLabels.Clear();
-            foreach (Pawn pawn in PawnsFinder.AllCaravansAndTravellingTransporters_Alive)
+            foreach (Pawn pawn in PawnsFinder.AllMapsCaravansAndTravellingTransporters_Alive)
             {
                 if (pawn.genes == null || !pawn.RaceProps.Humanlike || pawn.Faction != Faction.OfPlayer) continue;
                 Gene_Soul firstGeneOfType = pawn.genes.GetFirstGeneOfType<Gene_Soul>();

@@ -11,4 +11,17 @@
     <BX_NeverConsumeSoul>Never consume soulgem.</BX_NeverConsumeSoul>
     <BX_ConsumeSoulBelow>Consume soulgem below</BX_ConsumeSoulBelow>
 
+
+    <MB_AlertLowSoulEnergy>Low soul saturation</MB_AlertLowSoulEnergy>
+    <MB_AlertLowSoulEnergyDesc>These soul eaters are running out of soul saturation. Give them a bottled soul essence or let them drain someone</MB_AlertLowSoulEnergyDesc>
+    <MB_NotAllowedSoulgem>Consuming bottled souls is switched off for this person.</MB_NotAllowedSoulgem>
+    <MB_AutoTakeSoulDesc>Automatically consume a bottled soul essence whenever {PAWN_nameDef}'s soul saturation falls below {MIN}.\n\nCurrently {ONOFF}.</MB_AutoTakeSoulDesc>
+
+    <MB_AbilityDisabledNoSoulGene>{0} has no soul eater gene.</MB_AbilityDisabledNoSoulGene>
+    <MB_AbilityDisabledNoSoul>{0} does not have enough soul saturation.</MB_AbilityDisabledNoSoul>
+    <MB_AbilitySoulCost>Soul saturation cost</MB_AbilitySoulCost>
+    <AbilitySoulGain>Soul saturation gain</AbilitySoulGain>
+
+    <BX_SoulEnergy>soul saturation</BX_SoulEnergy>
+    <BX_SoulEnergy_Desc>How much soul saturation this restores when consumed.</BX_SoulEnergy_Desc>
 </LanguageData>

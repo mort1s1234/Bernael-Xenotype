@@ -49,16 +49,6 @@ namespace Bernael_Xenotype
             if (gene_SoulDrain != null)
             {
                 OffsetResource(gene_SoulDrain, offset);
-                float value = gene_SoulDrain.Resource.Value;
-                gene_SoulDrain.Resource.Value += offset;
-                if (value > 0f && gene_SoulDrain.Resource.Value <= 0f)
-                {
-                    Pawn genePawn = gene_SoulDrain.Pawn;
-                    if (!genePawn.health.hediffSet.HasHediff(BernaelDefOf.BX_SoulCraving))
-                    {
-                        genePawn.health.AddHediff(BernaelDefOf.BX_SoulCraving);
-                    }
-                }
                 return;
             }
             Pawn_GeneTracker genes2 = pawn.genes;

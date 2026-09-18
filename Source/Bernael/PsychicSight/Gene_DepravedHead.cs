@@ -17,12 +17,17 @@ namespace Bernael_Xenotype
             base.PostAdd();
             if (pawn.health == null) return;
 
-            if (gameComp.psychicSeers.NullOrEmpty())
-                gameComp.psychicSeers = new HashSet<Pawn>();
-
-            if (gameComp != null)
-                gameComp.psychicSeers.Add(pawn);
-            else Log.Error("The psychic sight game component was missing, this isn't supposed to happen.");
+            Gamecomponent_PsychicSight sightComp = gameComp;
+            if (sightComp == null)
+            {
+                Log.Error("The psychic sight game component was missing, this isn't supposed to happen.");
+            }
+            else
+            {
+                if (sightComp.psychicSeers.NullOrEmpty())
+                    sightComp.psychicSeers = new HashSet<Pawn>();
+                sightComp.psychicSeers.Add(pawn);
+            }
 
 
             foreach (BodyPartRecord bodyPart in pawn?.RaceProps?.body?.AllParts)
