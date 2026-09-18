@@ -12,7 +12,9 @@ namespace Bernael_Xenotype
             if (!__result) return;
             Pawn instigator = ___pawn;
             if (instigator.genes?.GetGene(BernaelDefOf.BX_DarkSpeech) == null) return;
-            if (recipient.needs.mood.thoughts == null || recipient.genes == null || recipient.genes.GetGene(BernaelDefOf.BX_DarkSpeech) != null) return;
+            if (recipient.genes == null || recipient.genes.GetGene(BernaelDefOf.BX_DarkSpeech) != null) return;
+            // Animals and other pawns without a mood need keep no memories.
+            if (recipient.needs == null || recipient.needs.mood == null || recipient.needs.mood.thoughts == null) return;
             recipient.needs.mood.thoughts.memories.TryGainMemory(BernaelDefOf.BX_HeardDarkSpeech);
         }
     }
