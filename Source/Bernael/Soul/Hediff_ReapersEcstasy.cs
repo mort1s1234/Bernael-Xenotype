@@ -1,4 +1,4 @@
-using RimWorld;
+﻿using RimWorld;
 using Verse;
 
 namespace Bernael_Xenotype
@@ -20,7 +20,7 @@ namespace Bernael_Xenotype
             if (ModExt == null || !victim.HostileTo(pawn.Faction) || pawn?.genes?.GetGene(BernaelDefOf.BX_SoulStarved) == null) return;
             Gene_Soul gene_Soul = (Gene_Soul)pawn.genes.GetGene(BernaelDefOf.BX_SoulStarved);
 
-            gene_Soul.ValuePercent += ModExt.killRefillPct / 100f;
+            gene_Soul.Value += ModExt.killRefillPct / 100f * gene_Soul.Max;
             this.Severity += 1;
         }
 
