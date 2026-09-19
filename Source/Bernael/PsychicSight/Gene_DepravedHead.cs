@@ -30,11 +30,18 @@ namespace Bernael_Xenotype
             }
 
 
-            foreach (BodyPartRecord bodyPart in pawn?.RaceProps?.body?.AllParts)
+            // AllParts is the anatomy of the race, not the body of this pawn: it always lists both eyes,
+            // even on a pawn that lost one. AddDirect refuses a part that is not in GetNotMissingParts,
+            // logs a red error and adds nothing, so the pawn silently stayed sighted on that side.
+            // The list is copied first because AddHediff dirties the cache GetNotMissingParts reads from.
+            List<BodyPartRecord> eyes = pawn.health.hediffSet.GetNotMissingParts()
+                .Where(bodyPart => bodyPart.def.defName.ToLowerInvariant().Contains("eye"))
+                .ToList();
+
+            foreach (BodyPartRecord eye in eyes)
             {
-                BodyPartDef bodyPartDef = bodyPart.def;
-                if (!bodyPartDef.defName.ToLowerInvariant().Contains("eye")) continue;
-                pawn.health.AddHediff(HediffMaker.MakeHediff(BernaelDefOf.BX_Blindness, pawn, bodyPart));
+                if (pawn.health.hediffSet.HasDirectlyAddedPartFor(eye)) continue;
+                pawn.health.AddHediff(HediffMaker.MakeHediff(BernaelDefOf.BX_Blindness, pawn, eye));
             }
         }
 
