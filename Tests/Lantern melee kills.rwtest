@@ -1,0 +1,18 @@
+rwtest 1
+test "Lantern melee kills" project=Bernael group=Weapon created=2026-09-17T00:00:00
+
+requires dlc=Biotech
+spawn Pawn:Colonist at 0,0 name="Bernael" xenotype=BX_Bernael
+spawn Pawn:Pirate at 1,0 name="Pirate" faction=enemy
+spawn Thing:BX_SoulLantern at 0,1 name="lantern"
+equip "Bernael" thing="lantern"
+damage "Pirate" amount=30
+down "Pirate"
+draft "Bernael"
+attack "Bernael" target="Pirate" melee=true
+assert pawn "Bernael" drafted
+assert pawn "Bernael" job=AttackMelee
+tick 2500 reason="about 20 swings at 1.5 to 1.8 s cooldown"
+assert pawn "Pirate" dead
+undraft "Bernael"
+assert log clean

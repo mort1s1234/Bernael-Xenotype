@@ -1,0 +1,23 @@
+rwtest 1
+test "Drain damages and feeds" project="Bernael" group="Soul" created=2026-09-17T00:00:00
+
+# BX_SoulFeeding is a touch ability with 2 s warmup (120 ticks).
+# CompAbilityEffect_SoulDrain puts BX_SoulDrained at severity 0.4499 on the
+# target and gives the caster +0.2 soul, scaled by the body size of the victim.
+#
+# The balance is the point: 0.1 plus 0.2 is 0.3. The tight range catches both a
+# missing gain and a doubled one.
+
+requires dlc=Biotech
+spawn Pawn:Colonist at 0,0 name="Bernael" xenotype=BX_Bernael
+spawn Pawn:Colonist at 2,0 name="Victim"
+
+# Low enough that the gain shows in the gizmo instead of hitting the cap.
+give "Bernael" resource=BX_SoulStarved value=0.1
+
+cast "Bernael" ability=BX_SoulFeeding target="Victim"
+tick 180 reason="120 ticks warmup plus slack"
+
+assert pawn "Victim" hediff=BX_SoulDrained expect=present
+assert pawn "Victim" hediff=BX_SoulDrained severity min=0.44 max=0.46
+assert pawn "Bernael" resource=BX_SoulStarved min=0.25 max=0.35

@@ -1,0 +1,61 @@
+rwtest 1
+test "Dark mirage dies quietly with its caster" project="Bernael" group="Ability" created=2026-09-21T00:00:00
+
+# DarkMirage.TickInterval dismisses the decoy when the caster is gone - null,
+# dead, unspawned, on another map, or in another faction - and Dismiss sets
+# suppressBurst before it destroys. The comment in the source says what the
+# claim is: "Owner loss or faction change is cleanup, not a free offensive
+# detonation." Killing the caster must not become a way to set off the burst
+# from outside.
+#
+# Two casters, because the negative alone proves nothing: a decoy that never
+# burns anybody, or a Frostbite hediff the kit cannot read, would pass the
+# silent half just as well. "Keeper" keeps its decoy and its decoy is destroyed
+# the ordinary way at the bottom, so the same pair of lines that stays quiet
+# for the dead caster goes off for the living one, in one run and one scene.
+#
+# The radius and the hostility filter are not this file's claim - "Dark mirage
+# burns only the hostiles it reaches" owns those. Here both pirates stand one
+# cell away and the only difference between them is whose caster is alive.
+#
+# Neither decoy is anywhere near its 600 ticks when this runs, so nothing below
+# can be an expiry that happened to arrive.
+
+requires dlc=Biotech
+requires dlc=Royalty
+requires verb=ability
+
+despawn Thing:BX_DarkMirageDecoy
+spawn Pawn:Colonist at 0,0 name="Owner" xenotype=BX_Bernael
+spawn Pawn:Colonist at 1,0 name="Keeper"
+ability "Owner" grant=BX_DarkMirage psylink=2 psyfocus=1.0
+ability "Keeper" grant=BX_DarkMirage psylink=2 psyfocus=1.0
+draft "Owner"
+draft "Keeper"
+
+cast "Owner" ability=BX_DarkMirage at 4,0
+tick 60 reason="0.6 s warmup is 36 ticks"
+cast "Keeper" ability=BX_DarkMirage at 10,0
+tick 60 reason="0.6 s warmup is 36 ticks"
+assert thing BX_DarkMirageDecoy at 4,0
+assert thing BX_DarkMirageDecoy at 10,0
+
+speed paused
+spawn Pawn:Pirate at 5,0 name="Beside Owner" faction=enemy
+spawn Pawn:Pirate at 11,0 name="Beside Keeper" faction=enemy
+
+damage "Owner" amount=999
+tick 10 reason="TickInterval reads the caster every tick"
+
+# The caster is dead, so its decoy is gone - and the pirate that stood one cell
+# from it is untouched.
+assert thing BX_DarkMirageDecoy at 4,0 expect=absent
+assert pawn "Beside Owner" hediff=Frostbite expect=absent
+
+# The other one never lost its caster, so it is still standing and still armed.
+assert thing BX_DarkMirageDecoy at 10,0
+despawn Thing:BX_DarkMirageDecoy
+assert pawn "Beside Keeper" hediff=Frostbite expect=present
+
+undraft "Keeper"
+assert log clean

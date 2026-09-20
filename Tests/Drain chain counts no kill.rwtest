@@ -1,0 +1,22 @@
+rwtest 1
+test "Drain chain counts no kill" project="Bernael" group="Soul" created=2026-09-18T00:00:00
+
+# Three drains push BX_SoulDrained past lethalSeverity 1 and the victim dies of
+# the hediff, not of the caster. Hediff_ReapersEcstasy.Notify_KilledPawn never
+# fires, so draining someone dry scores no kill - unlike shooting them. The
+# test does not judge that, it only pins it down.
+
+requires dlc=Biotech
+spawn Pawn:Colonist at 0,0 name="Bernael" xenotype=BX_Bernael
+spawn Pawn:Colonist at 2,0 name="Victim"
+give "Bernael" resource=BX_SoulStarved value=0.1
+
+cast "Bernael" ability=BX_SoulFeeding target="Victim"
+tick 180 reason="120 ticks warmup plus slack"
+cast "Bernael" ability=BX_SoulFeeding target="Victim"
+tick 180 reason="second drain, now at stage extreme"
+cast "Bernael" ability=BX_SoulFeeding target="Victim"
+tick 300 reason="third drain, the hediff has to kill"
+
+assert pawn "Victim" dead
+assert pawn "Bernael" hediff=BX_ReaperEcstasy severity max=1

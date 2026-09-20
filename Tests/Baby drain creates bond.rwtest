@@ -1,0 +1,38 @@
+rwtest 1
+test "Baby drain creates bond" project="Bernael" group="Bond" created=2026-09-18T00:00:00
+
+# CompAbilityEffect_SoulDrain.Apply asks SoulUtility.TryConvertBaby first and
+# returns when it answers yes. So a baby is never drained, it is adopted: the
+# xenotype is overwritten, blood relations are cut, a Parent relation to the
+# drainer is added and BabyBondUtility.EstablishBond hangs BX_BabyBond_Feeder on
+# the drainer and BX_BabyBond_Victim on the baby.
+#
+# The whole BabyBond subsystem had no test at all. This is its entry point -
+# the only caller of EstablishBond outside the bond code itself.
+#
+# BX_Blindness on the baby is the proof of the conversion: it comes with
+# BX_DepravedHead, which the baby only has once it carries the xenotype.
+# BX_SoulDrained absent is the proof that Apply returned before DoDrain.
+#
+# The asserts follow the order of TryConvertBaby, so the first red one names the
+# step that broke. The xenotype and its genes go on first, then the blood
+# relations are cut, and EstablishBond runs last. Blindness missing therefore
+# means the conversion never started; Blindness there without the bond means it
+# died on the way - most likely in the relation loop, which reads
+# relations.otherPawn.needs.mood.thoughts.memories without a null check and sits
+# directly in front of EstablishBond. Read the asserts bottom-up and that
+# failure looks like a bond problem instead.
+
+requires dlc=Biotech
+spawn Pawn:Colonist at 0,0 name="Bernael" xenotype=BX_Bernael
+spawn Pawn:Colonist at 1,0 name="Baby" age=1
+
+give "Bernael" resource=BX_SoulStarved value=0.1
+cast "Bernael" ability=BX_SoulFeeding target="Baby"
+tick 180 reason="120 ticks warmup plus slack"
+
+assert pawn "Baby" hediff=BX_Blindness expect=present
+assert pawn "Baby" hediff=BX_SoulDrained expect=absent
+assert pawn "Bernael" hediff=BX_BabyBond_Feeder expect=present
+assert pawn "Baby" hediff=BX_BabyBond_Victim expect=present
+assert log clean

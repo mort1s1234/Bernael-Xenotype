@@ -1,0 +1,57 @@
+rwtest 1
+test "Full warlock loadout stacks" project="Bernael" group="Items" created=2026-09-19T00:00:00
+
+# "Sensitivity stacks" puts the lantern, a gene and a hediff on one pawn.
+# The apparel was never in that picture, so the loadout a player actually
+# builds - helmet, armor and lantern together - was measured nowhere.
+#
+# PsychicSensitivity, offsets only:
+#   baseline 1.4 without Royalty, 1.9 with it
+#   + 0.4 helmet + 0.3 armor + 0.25 lantern = 0.95
+#   -> 2.35 or 2.85, so a floor of 2.3 holds either way
+#
+# PsychicEntropyRecoveryRate is the second stat here because it is the only
+# one all three pieces touch and nothing in "Sensitivity stacks" reads:
+#   0.54 defaultBaseValue
+#   + 0.25 BX_Mastermind statOffsets
+#   = 0.79 bare
+#   + 0.070 helmet + 0.060 armor + 0.040 lantern
+#   = 0.96 fully equipped
+# The psylink of BX_Hexmaster is level 1, whose statFactors are 1.0 for this
+# stat, so Royalty makes no difference to these two numbers.
+#
+# Mood is pinned high on purpose. PsychicEntropyRecoveryRate carries a
+# StatPart_Pain with factor 3, and BX_WitheredSoulHediff sits on every Bernael
+# and turns a low mood into up to 0.35 pain - which would pull both readings
+# down by a fifth and make the bounds below meaningless. Mood 0.95 puts the
+# hediff in its "Absence of pain" stage, so the gear is the only thing moving.
+#
+# If a run still reads low on both entropy lines, the pawn was generated with
+# an age hediff that carries pain of its own. Pin the age on the spawn line
+# rather than widening the bounds - a bound wide enough to swallow pain is
+# also wide enough to swallow the gear.
+
+requires dlc=Biotech
+spawn Pawn:Colonist at 0,0 name="Bernael" xenotype=BX_Bernael
+spawn Thing:BX_Headgear_Warlock at 2,0
+spawn Thing:BX_Apparel_Warlock at 3,0
+spawn Thing:BX_SoulLantern at 4,0
+
+give "Bernael" need=Mood value=0.95
+tick 480 reason="Hediff_SeverityBasedOnNeed only reads the need every 420 ticks"
+
+assert pawn "Bernael" stat=PsychicSensitivity max=2.0
+assert pawn "Bernael" stat=PsychicEntropyRecoveryRate min=0.74 max=0.84
+
+wear "Bernael" apparel=BX_Headgear_Warlock
+wear "Bernael" apparel=BX_Apparel_Warlock
+equip "Bernael" thing=BX_SoulLantern
+
+assert pawn "Bernael" apparel=BX_Headgear_Warlock
+assert pawn "Bernael" apparel=BX_Apparel_Warlock
+assert pawn "Bernael" equipment=BX_SoulLantern
+
+assert pawn "Bernael" stat=PsychicSensitivity min=2.3
+assert pawn "Bernael" stat=PsychicEntropyRecoveryRate min=0.91 max=1.01
+
+assert log clean

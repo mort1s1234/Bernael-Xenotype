@@ -1,0 +1,22 @@
+rwtest 1
+test "Drain raises prisoner resistance" project="Bernael" group="Soul" created=2026-09-18T00:00:00
+
+# SoulUtility.DoDrain raises prisoner resistance by resistanceGain 1 and clamps
+# to kindDef.initialResistanceRange.Value.TrueMax.
+#
+# That line is brittle: PawnKindDefs without initialResistanceRange return null
+# there and .Value throws. "assert log clean" is in for that - the resistance
+# value alone would not show a silent abort in the middle of DoDrain.
+
+requires dlc=Biotech
+spawn Pawn:Colonist at 0,0 name="Bernael" xenotype=BX_Bernael
+spawn Pawn:Colonist at 2,0 name="Prisoner"
+prisoner "Prisoner" resistance=10
+give "Bernael" resource=BX_SoulStarved value=0.1
+
+cast "Bernael" ability=BX_SoulFeeding target="Prisoner"
+tick 180 reason="120 ticks warmup plus slack"
+
+assert pawn "Prisoner" hediff=BX_SoulDrained expect=present
+assert pawn "Prisoner" resistance min=11 max=11
+assert log clean

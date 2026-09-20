@@ -1,0 +1,41 @@
+rwtest 1
+test "Dark mirage expires on its own" project="Bernael" group="Ability" created=2026-09-21T00:00:00
+
+# MirageSettings.durationTicks on BX_DarkMirageDecoy is 600. SpawnSetup writes
+# expiresTick = createdTick + 600, and TickInterval calls Destroy() the first
+# tick at or past it.
+#
+# The budgets are that 600 and nothing measured. The decoy starts existing when
+# Apply runs at the end of the 36-tick warmup, so after the first "tick 60" it
+# is about 24 ticks old:
+#
+#   after tick 480 -> about 504 ticks old, 96 short of 600, still standing
+#   after tick 180 -> about 684 ticks old,  84 past 600, gone
+#
+# Both margins are wider than the whole warmup, so neither line depends on when
+# inside the budget the cast landed.
+#
+# The "still standing" line is the half that makes this a test. Without it a
+# decoy that never spawned, or one that vanished on its first tick, reads
+# exactly like one that lived its 600 ticks and expired.
+
+requires dlc=Biotech
+requires dlc=Royalty
+requires verb=ability
+
+despawn Thing:BX_DarkMirageDecoy
+spawn Pawn:Colonist at 0,0 name="Bernael" xenotype=BX_Bernael
+ability "Bernael" grant=BX_DarkMirage psylink=2 psyfocus=1.0
+draft "Bernael"
+cast "Bernael" ability=BX_DarkMirage at 4,0
+tick 60 reason="0.6 s warmup is 36 ticks"
+assert thing BX_DarkMirageDecoy at 4,0
+
+tick 480 reason="about 504 of the 600 ticks spent"
+assert thing BX_DarkMirageDecoy at 4,0
+
+tick 180 reason="about 684 ticks, past the 600 of durationTicks"
+assert thing BX_DarkMirageDecoy expect=absent
+
+undraft "Bernael"
+assert log clean

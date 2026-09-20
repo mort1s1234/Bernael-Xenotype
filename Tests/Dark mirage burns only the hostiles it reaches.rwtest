@@ -1,0 +1,61 @@
+rwtest 1
+test "Dark mirage burns only the hostiles it reaches" project="Bernael" group="Ability" created=2026-09-21T00:00:00
+
+# DarkMirage.Destroy detonates for DestroyMode.Vanish and KillFinalize, and
+# then walks every spawned pawn on the map, skipping each one that is dead,
+# downed, not flesh, not hostile to the mirage, further than burstRadius 2.4,
+# or without line of sight. What is left takes DamageInfo(Frostbite, 4).
+# Vanilla's Frostbite DamageDef carries <hediff>Frostbite</hediff>, so the
+# marker this test reads is that hediff on the victim.
+#
+# The burst is triggered with "despawn" and not by waiting out the 600 ticks,
+# and that is not a detour: "despawn" destroys with DestroyMode.Vanish, which
+# is the exact call TickInterval makes at expiry - "Destroy()" with its default
+# argument. What waiting would add is 600 ticks in which three pawns walk, and
+# a radius claim whose distances the script no longer states is not a claim.
+# "Dark mirage expires on its own" owns the 600 ticks.
+#
+# Three directions, because the filter has three parts and a single victim
+# would pass for any of them:
+#
+#   "Near"  hostile,  1 cell from the decoy  -> burned      (inside 2.4)
+#   "Far"   hostile,  4 cells from the decoy -> not burned  (outside 2.4)
+#   "Ally"  friendly, 1 cell from the decoy  -> not burned  (HostileTo is false)
+#
+# No severity bound on the hediff. DamageWorker_Frostbite picks the part and
+# harmAllLayersUntilOutside spreads what it deals, so a severity here would be
+# a bound on which part the roll chose and not on the 4 the mod passes in.
+#
+# The scene is built after the cast and under "speed paused": the two pirates
+# are placed, not launched, but their think tree is free the moment the clock
+# runs, and this file's whole claim is about where they stand.
+
+requires dlc=Biotech
+requires dlc=Royalty
+requires verb=ability
+
+despawn Thing:BX_DarkMirageDecoy
+spawn Pawn:Colonist at 0,0 name="Bernael" xenotype=BX_Bernael
+ability "Bernael" grant=BX_DarkMirage psylink=2 psyfocus=1.0
+draft "Bernael"
+cast "Bernael" ability=BX_DarkMirage at 4,0
+tick 60 reason="0.6 s warmup is 36 ticks"
+assert thing BX_DarkMirageDecoy at 4,0
+
+speed paused
+spawn Pawn:Pirate at 5,0 name="Near" faction=enemy
+spawn Pawn:Pirate at 4,4 name="Far" faction=enemy
+spawn Pawn:Colonist at 3,0 name="Ally"
+
+assert pawn "Near" hediff=Frostbite expect=absent
+assert pawn "Far" hediff=Frostbite expect=absent
+assert pawn "Ally" hediff=Frostbite expect=absent
+
+despawn Thing:BX_DarkMirageDecoy
+
+assert pawn "Near" hediff=Frostbite expect=present
+assert pawn "Far" hediff=Frostbite expect=absent
+assert pawn "Ally" hediff=Frostbite expect=absent
+
+undraft "Bernael"
+assert log clean

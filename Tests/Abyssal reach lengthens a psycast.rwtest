@@ -1,0 +1,61 @@
+rwtest 1
+test "Abyssal reach lengthens a psycast" project="Bernael" group="Genes" created=2026-09-21T00:00:00
+
+# Patch_Verb_EffectiveRange is a postfix on the Verb.EffectiveRange getter. It
+# leaves every verb alone except a Verb_CastAbility whose Ability.def.IsPsycast
+# is true, and there it multiplies the range by AbyssalReachUtility.RangeFactor
+# = 1.25 when the caster has an active BX_AbyssalReach. The gene is an endogene
+# of BX_Bernael, so the xenotype is what sets the two pawns apart.
+#
+# BX_DarkMirage is the psycast this file measures with, because its
+# verbProperties range of 19.9 puts both bounds inside one test map:
+#
+#   without the gene   19.9 cells
+#   with the gene      19.9 * 1.25 = 24.875 cells
+#
+# The target cell sits at 22, which is 2.1 past the plain range and 2.875 short
+# of the extended one. Neither margin is close enough for a rounding rule or a
+# diagonal to decide the answer.
+#
+# No assert reads a verb's effective range, and none is needed: the kit's
+# "cast" asks Ability.CanApplyOn before it activates anything, and that is
+# where the range is checked - so the refusal a player would get is the
+# observable, and it is the one this file reads. A test that read the number
+# instead would be reading the patch back to itself.
+#
+# The near cast by "Plain" is the line that makes the refusal mean anything.
+# Without it, "refused at 22 cells" is equally true of a pawn that never got
+# the ability, and this test would pass on a broken grant.
+
+requires dlc=Biotech
+requires dlc=Royalty
+requires verb=ability
+
+despawn Thing:BX_DarkMirageDecoy
+spawn Pawn:Colonist at 0,0 name="Bernael" xenotype=BX_Bernael
+spawn Pawn:Colonist at 0,1 name="Plain"
+assert pawn "Bernael" gene=BX_AbyssalReach expect=present
+assert pawn "Plain" gene=BX_AbyssalReach expect=absent
+
+ability "Bernael" grant=BX_DarkMirage psylink=2 psyfocus=1.0
+ability "Plain" grant=BX_DarkMirage psylink=2 psyfocus=1.0
+draft "Bernael"
+draft "Plain"
+
+# 22 cells is past 19.9, so the pawn without the gene cannot reach it.
+cast "Plain" ability=BX_DarkMirage at 22,0 expect=refused
+
+# The same pawn, the same ability, a cell it does reach: the refusal above was
+# about the distance and not about the grant.
+cast "Plain" ability=BX_DarkMirage at 8,1
+tick 60 reason="0.6 s warmup is 36 ticks"
+assert thing BX_DarkMirageDecoy at 8,1
+
+# 22 cells is inside 24.875, so the gene carries the cast that far.
+cast "Bernael" ability=BX_DarkMirage at 22,0
+tick 60 reason="0.6 s warmup is 36 ticks"
+assert thing BX_DarkMirageDecoy at 22,0
+
+undraft "Bernael"
+undraft "Plain"
+assert log clean

@@ -1,0 +1,56 @@
+rwtest 1
+test "Darkness changes hunger rate" project="Bernael" group="Genes" created=2026-09-19T00:00:00
+
+# This file owns the whole claim about BX_Gene_NourishingDarkness_Hediff. Until
+# 2026-09-21 a sibling "Darkness drives hunger" asserted the severity alone,
+# through the same two "sky glow=" lines - a strict subset of this file, not a
+# second claim, so it is gone and the severity asserts below are what is left of
+# it. The two stages of the hediff carry nothing but a hungerRateFactor, so the
+# severity is a means and this is the end:
+#
+#   severity 1 (dark or darklight) -> hungerRateFactor 0.5
+#   severity 2 (anything brighter) -> hungerRateFactor 2
+#
+# "hungerrate" reads HediffSet.HungerRateFactor, the product over all hediffs,
+# not nutrition per day - so the numbers below are the def's own and do not
+# depend on body size, age or the difficulty's food setting. Nothing else in
+# this mod writes hungerRateFactor, so the product has exactly one factor in it.
+#
+# Hediff_NourishingDarkness reads GroundGlowAt every 180 ticks and compares it
+# against 0.50, so the glow is this test's precondition and the severity is what
+# it produces. Both "assert glow" lines below state that precondition, and they
+# are what turns the tick budgets from a wait into an explanation: 240 is one
+# full 180-tick check plus margin, in both directions.
+
+requires dlc=Biotech
+spawn Pawn:Colonist at 0,0 name="Bernael" xenotype=BX_Bernael
+assert pawn "Bernael" hediff=BX_Gene_NourishingDarkness_Hediff expect=present
+
+sky glow=0
+assert glow "Bernael" max=0.49
+tick 240 reason="Hediff_NourishingDarkness reads the glow every 180 ticks"
+assert pawn "Bernael" hediff=BX_Gene_NourishingDarkness_Hediff severity max=1
+assert pawn "Bernael" hungerrate min=0.45 max=0.55
+
+sky glow=1
+# The budget here used to be 720 and the comment said it was measured, not
+# derived: the run of 2026-09-20 22:46 needed ~470 game ticks to get the ground
+# glow back over 0.50 after "sky glow=1", while the downward direction held at
+# t=0.00. That asymmetry was a RimDevKit question, it was filed as one, and the
+# kit answered it on 2026-09-21: SkyManager.SkyManagerUpdate overwrote the
+# pinned glow every frame and the pin ran a step behind it, and GroundGlowAt
+# drops the sky entirely for a roofed cell, so a pawn that had wandered under a
+# roof could never pass 0.5 from the sky at all. The pin is now re-applied in a
+# postfix on vanilla's own write, and the replay clears the ground it builds on.
+#
+# So the budget is derived again and reads like its sibling above: one 180-tick
+# check plus margin. The "assert glow" line is what makes that honest - if the
+# glow does not arrive, this line fails first and its actual names the sky, the
+# cell and whether the cell is roofed, instead of the severity below failing
+# after a budget nobody can explain.
+assert glow "Bernael" min=0.5
+tick 240 reason="Hediff_NourishingDarkness reads the glow every 180 ticks"
+assert pawn "Bernael" hediff=BX_Gene_NourishingDarkness_Hediff severity min=2
+assert pawn "Bernael" hungerrate min=1.9 max=2.1
+
+assert log clean
