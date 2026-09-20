@@ -5,10 +5,29 @@
     <BX_ReaperEcstasyKillCount>{0}/{1} Kills</BX_ReaperEcstasyKillCount>
     <BX_ReaperEcstasyKillCountMax>MAX Kills</BX_ReaperEcstasyKillCountMax>
 
+    <BX_MessageCannotUseOnSoulFeeder>{ABILITY_label} cannot be used on soul eaters.</BX_MessageCannotUseOnSoulFeeder>
     <BX_WillCauseSeriousSoulDrain>Will cause major soul drain</BX_WillCauseSeriousSoulDrain>
     <BX_WarningPawnWillHaveSeriousSoulDrainFromFeeding>Feeding on {PAWN_nameDef} will result in serious soul damage, leaving {PAWN_objective} unconscious.\n\nAre you sure?</BX_WarningPawnWillHaveSeriousSoulDrainFromFeeding>
     <BX_WarningPawnWillDieFromFeeding>Feeding on {PAWN_nameDef} will kill {PAWN_objective}.\n\nAre you sure?</BX_WarningPawnWillDieFromFeeding>
-    <BX_NeverConsumeSoul>Never consume soulgem.</BX_NeverConsumeSoul>
-    <BX_ConsumeSoulBelow>Consume soulgem below</BX_ConsumeSoulBelow>
+    <BX_NeverConsumeSoul>Never consume bottled souls.</BX_NeverConsumeSoul>
+    <BX_ConsumeSoulBelow>Consume bottled souls below</BX_ConsumeSoulBelow>
 
+
+    <MB_AlertLowSoulEnergy>Low soul saturation</MB_AlertLowSoulEnergy>
+    <MB_AlertLowSoulEnergyDesc>These soul eaters are running out of soul saturation. Give them a bottled soul essence or let them drain someone</MB_AlertLowSoulEnergyDesc>
+    <MB_BottledSoulDeliveryNotAllowed>{0} is not set to be brought food.</MB_BottledSoulDeliveryNotAllowed>
+    <MB_PrisonerNotInCell>{0} is not in a prison cell.</MB_PrisonerNotInCell>
+    <MB_PrisonerNeedsFoodFirst>{0} needs food before a bottled soul.</MB_PrisonerNeedsFoodFirst>
+    <MB_SoulNotLowEnough>{0} does not want a bottled soul yet.</MB_SoulNotLowEnough>
+    <MB_BottledSoulAlreadyThere>{0} can already reach a bottled soul.</MB_BottledSoulAlreadyThere>
+    <MB_NotAllowedBottledSoul>Consuming bottled souls is switched off for this person.</MB_NotAllowedBottledSoul>
+    <MB_AutoTakeSoulDesc>Automatically consume a bottled soul essence whenever {PAWN_nameDef}'s soul saturation falls below {MIN}.\n\nCurrently {ONOFF}.</MB_AutoTakeSoulDesc>
+
+    <MB_AbilityDisabledNoSoulGene>{0} has no soul eater gene.</MB_AbilityDisabledNoSoulGene>
+    <MB_AbilityDisabledNoSoul>{0} does not have enough soul saturation.</MB_AbilityDisabledNoSoul>
+    <MB_AbilitySoulCost>Soul saturation cost</MB_AbilitySoulCost>
+    <AbilitySoulGain>Soul saturation gain</AbilitySoulGain>
+
+    <BX_SoulEnergy>soul saturation</BX_SoulEnergy>
+    <BX_SoulEnergy_Desc>How much soul saturation this restores when consumed.</BX_SoulEnergy_Desc>
 </LanguageData>

@@ -1,16 +1,10 @@
-﻿using System.Collections.Generic;
 using Verse;
 
 namespace Bernael_Xenotype
 {
-    public class Gene_AddHediff : DefModExtension
-    {
-       public List<HediffDef> hediffsToAdd = new List<HediffDef>();
-    }
-
     public class Gene_Hediff : Gene
     {
-        Gene_AddHediff ModExt => def.GetModExtension<Gene_AddHediff>();
+        GeneAddHediffExtension ModExt => def.GetModExtension<GeneAddHediffExtension>();
 
         public override void PostAdd()
         {

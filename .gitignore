@@ -40,4 +40,33 @@ Source/DarkMirageUnity/Assets/Editor/MiragePreview.cs
 Source/DarkMirageUnity/Assets/Editor/MiragePreview.cs.meta
 Source/DarkMirageUnity/Assets/Editor/MirageDistanceChecks.cs
 Source/DarkMirageUnity/Assets/Editor/MirageDistanceChecks.cs.meta
-/Tests
+
+# Build intermediates and secondary output.
+# The shipped assembly lives in 1.6/Assemblies and IS tracked; everything
+# MSBuild produces on the way there is machine-specific and is not.
+[Bb]in/
+[Oo]bj/
+*.cache
+*.FileListAbsolute.txt
+
+# NuGet restore output
+project.assets.json
+*.nuget.g.props
+*.nuget.g.targets
+*.nuget.dgspec.json
+
+# IDE and per-user settings (contain absolute paths of the local install)
+.vs/
+.idea/
+*.user
+*.suo
+*.userprefs
+
+# OS clutter
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Local rwtest scripts for RimDevKit's test recorder.
+# RimDevKit is not released yet and only exists on this machine.
+Tests/
