@@ -4,7 +4,7 @@ using Verse;
 using Verse.AI;
 namespace Bernael_Xenotype
 {
-    public class WorkGiver_Warden_DeliverSoulGem : WorkGiver_Warden
+    public class WorkGiver_Warden_DeliverBottledSoul : WorkGiver_Warden
     {
         public override Job JobOnThing(Pawn pawn, Thing t, bool forced = false)
         {
@@ -19,7 +19,7 @@ namespace Bernael_Xenotype
             Pawn prisoner = (Pawn)t;
             if (!prisoner.guest.CanBeBroughtFood)
             {
-                JobFailReason.Is("MB_SoulgemDeliveryNotAllowed".Translate(prisoner));
+                JobFailReason.Is("MB_BottledSoulDeliveryNotAllowed".Translate(prisoner));
                 return null;
             }
             if (!prisoner.Position.IsInPrisonCell(prisoner.Map))
@@ -38,9 +38,9 @@ namespace Bernael_Xenotype
             {
                 return null;
             }
-            if (!gene_Soul.soulBasicGemsAllowed)
+            if (!gene_Soul.bottledSoulsAllowed)
             {
-                JobFailReason.Is("MB_NotAllowedSoulgem".Translate());
+                JobFailReason.Is("MB_NotAllowedBottledSoul".Translate());
                 return null;
             }
             if (!gene_Soul.ShouldConsumeSoulNow())
@@ -48,9 +48,9 @@ namespace Bernael_Xenotype
                 JobFailReason.Is("MB_SoulNotLowEnough".Translate(prisoner));
                 return null;
             }
-            if (SoulGemAlreadyAvailableFor(prisoner))
+            if (BottledSoulAlreadyAvailableFor(prisoner))
             {
-                JobFailReason.Is("MB_SoulgemAlreadyThere".Translate(prisoner));
+                JobFailReason.Is("MB_BottledSoulAlreadyThere".Translate(prisoner));
                 return null;
             }
             Thing thing = GenClosest.ClosestThingReachable(pawn.Position, pawn.Map, ThingRequest.ForDef(BernaelDefOf.BX_BottledSoul), PathEndMode.OnCell, TraverseParms.For(pawn), 9999f, pack => !pack.IsForbidden(pawn) && pawn.CanReserve(pack) && pack.GetRoom() != prisoner.GetRoom());
@@ -65,7 +65,7 @@ namespace Bernael_Xenotype
             return job;
         }
 
-        private bool SoulGemAlreadyAvailableFor(Pawn prisoner)
+        private bool BottledSoulAlreadyAvailableFor(Pawn prisoner)
         {
             if (prisoner.carryTracker.CarriedCount(BernaelDefOf.BX_BottledSoul) > 0)
             {

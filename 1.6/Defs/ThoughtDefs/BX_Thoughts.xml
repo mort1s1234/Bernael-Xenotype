@@ -2,7 +2,7 @@
 <Defs>
 
     <ThoughtDef>
-        <defName>BX_AbsorbedCorruptedSoulGem</defName>
+        <defName>BX_AbsorbedCorruptedBottledSoul</defName>
         <thoughtClass>Thought_Memory</thoughtClass>
         <durationDays>5</durationDays>
         <stackLimit>5</stackLimit>

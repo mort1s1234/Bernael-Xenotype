@@ -109,19 +109,19 @@
 		<keepOnBodyPartRestoration>True</keepOnBodyPartRestoration>
 		<stages>
 			<li>
-				<becomeVisible>false</becomeVisible>
+				<becomeVisible>true</becomeVisible>
 				<painOffset>0.35</painOffset>
 				<label>Huge pain</label>
 				<minSeverity>0</minSeverity>
 			</li>
 			<li>
-				<becomeVisible>false</becomeVisible>
+				<becomeVisible>true</becomeVisible>
 				<painOffset>0.25</painOffset>
 				<label>Serious pain</label>
 				<minSeverity>0.3</minSeverity>
 			</li>
 			<li>
-				<becomeVisible>false</becomeVisible>
+				<becomeVisible>true</becomeVisible>
 				<painOffset>0.15</painOffset>
 				<label>Aching pain</label>
 				<minSeverity>0.6</minSeverity>

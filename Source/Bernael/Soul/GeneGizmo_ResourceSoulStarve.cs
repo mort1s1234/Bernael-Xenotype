@@ -65,11 +65,11 @@ namespace Bernael_Xenotype
                 headerRect.xMax -= 24f;
                 Rect rect = new Rect(headerRect.xMax, headerRect.y, 24f, 24f);
                 Widgets.DefIcon(rect, BernaelDefOf.BX_BottledSoul);
-                GUI.DrawTexture(new Rect(rect.center.x, rect.y, rect.width / 2f, rect.height / 2f), soulGene.soulBasicGemsAllowed ? Widgets.CheckboxOnTex : Widgets.CheckboxOffTex);
+                GUI.DrawTexture(new Rect(rect.center.x, rect.y, rect.width / 2f, rect.height / 2f), soulGene.bottledSoulsAllowed ? Widgets.CheckboxOnTex : Widgets.CheckboxOffTex);
                 if (Widgets.ButtonInvisible(rect))
                 {
-                    soulGene.soulBasicGemsAllowed = !soulGene.soulBasicGemsAllowed;
-                    if (soulGene.soulBasicGemsAllowed)
+                    soulGene.bottledSoulsAllowed = !soulGene.bottledSoulsAllowed;
+                    if (soulGene.bottledSoulsAllowed)
                     {
                         SoundDefOf.Tick_High.PlayOneShotOnCamera();
                     }
@@ -81,7 +81,7 @@ namespace Bernael_Xenotype
                 if (Mouse.IsOver(rect))
                 {
                     Widgets.DrawHighlight(rect);
-                    string onOff = (soulGene.soulBasicGemsAllowed ? "On" : "Off").Translate().ToString().UncapitalizeFirst();
+                    string onOff = (soulGene.bottledSoulsAllowed ? "On" : "Off").Translate().ToString().UncapitalizeFirst();
                     TooltipHandler.TipRegion(rect, () => "MB_AutoTakeSoulDesc".Translate(gene.pawn.Named("PAWN"), soulGene.PostProcessValue(soulGene.targetValue).Named("MIN"), onOff.Named("ONOFF")).Resolve(), 828267371);
                     mouseOverElement = true;
                 }

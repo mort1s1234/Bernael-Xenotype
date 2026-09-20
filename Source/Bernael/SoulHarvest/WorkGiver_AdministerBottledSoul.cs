@@ -4,7 +4,7 @@ using Verse.AI;
 
 namespace Bernael_Xenotype
 {
-    public class WorkGiver_AdministerSoulGem : WorkGiver_Scanner
+    public class WorkGiver_AdministerBottledSoul : WorkGiver_Scanner
     {
         public override ThingRequest PotentialWorkThingRequest => ThingRequest.ForGroup(ThingRequestGroup.Pawn);
 
@@ -37,24 +37,24 @@ namespace Bernael_Xenotype
             }
             if (!gene_Soul.ShouldConsumeSoulNow())
             {
-                JobFailReason.Is("MB_NotAllowedSoulgem".Translate());
+                JobFailReason.Is("MB_NotAllowedBottledSoul".Translate());
                 return false;
             }
             if (!pawn.CanReserve(t, 1, -1, null, forced))
             {
                 return false;
             }
-            bool soulGemFlag = gene_Soul.soulBasicGemsAllowed;
-            bool soulGemExist = true;
-            if (soulGemFlag)
+            bool bottledSoulsAllowed = gene_Soul.bottledSoulsAllowed;
+            bool bottledSoulExists = true;
+            if (bottledSoulsAllowed)
             {
                 
                 if (GenClosest.ClosestThingReachable(pawn.Position, pawn.Map, ThingRequest.ForDef(BernaelDefOf.BX_BottledSoul), PathEndMode.OnCell, TraverseParms.For(pawn), 9999f, pack => !pack.IsForbidden(pawn) && pawn.CanReserve(pack)) == null)
                 {
-                    soulGemExist = false;
+                    bottledSoulExists = false;
                 }
             }
-            if (soulGemFlag && !soulGemExist)
+            if (bottledSoulsAllowed && !bottledSoulExists)
             {
                 JobFailReason.Is("NoIngredient".Translate(BernaelDefOf.BX_BottledSoul));
                 return false;

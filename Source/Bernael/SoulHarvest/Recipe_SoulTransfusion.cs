@@ -67,7 +67,7 @@ namespace Bernael_Xenotype
 					continue;
 				}
 				healed += SoulDrainHealedPerBottle * ingredients[i].stackCount;
-				soulGained += JobGiver_GetSoulGem.SoulGemEnergyGain * ingredients[i].stackCount;
+				soulGained += JobGiver_GetBottledSoul.BottledSoulEnergyGain * ingredients[i].stackCount;
 			}
 			if (healed > 0f)
 			{

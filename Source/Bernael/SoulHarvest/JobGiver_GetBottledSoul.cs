@@ -5,19 +5,19 @@ using Verse;
 using Verse.AI;
 namespace Bernael_Xenotype
 {
-    public class JobGiver_GetSoulGem : ThinkNode_JobGiver
+    public class JobGiver_GetBottledSoul : ThinkNode_JobGiver
     {
-        public static float SoulGemEnergyGain
+        public static float BottledSoulEnergyGain
         {
             get
             {
-                if (cachedSoulGenEnergyGain != null)
+                if (cachedBottledSoulEnergyGain != null)
                 {
-                    return cachedSoulGenEnergyGain.Value;
+                    return cachedBottledSoulEnergyGain.Value;
                 }
                 if (!ModsConfig.BiotechActive)
                 {
-                    cachedSoulGenEnergyGain = 0f;
+                    cachedBottledSoulEnergyGain = 0f;
                 }
                 else
                 {
@@ -42,20 +42,20 @@ namespace Bernael_Xenotype
                     IngestionOutcomeDoer_OffsetSoul ingestionOutcomeDoer_OffsetSoul = obj as IngestionOutcomeDoer_OffsetSoul;
                     if (ingestionOutcomeDoer_OffsetSoul == null)
                     {
-                        cachedSoulGenEnergyGain = 0f;
+                        cachedBottledSoulEnergyGain = 0f;
                     }
                     else
                     {
-                        cachedSoulGenEnergyGain = ingestionOutcomeDoer_OffsetSoul.offset;
+                        cachedBottledSoulEnergyGain = ingestionOutcomeDoer_OffsetSoul.offset;
                     }
                 }
-                return cachedSoulGenEnergyGain.Value;
+                return cachedBottledSoulEnergyGain.Value;
             }
         }
 
         public static void ResetStaticData()
         {
-            cachedSoulGenEnergyGain = null;
+            cachedBottledSoulEnergyGain = null;
         }
 
         public override float GetPriority(Pawn pawn)
@@ -92,19 +92,19 @@ namespace Bernael_Xenotype
                     return JobMaker.MakeJob(BernaelDefOf.BX_PrisonerSoulFeed, prisoner);
                 }
             }
-            if (!gene_Soul.soulBasicGemsAllowed) return null;
-            int num = Mathf.FloorToInt((gene_Soul.Max - gene_Soul.Value) / SoulGemEnergyGain);
+            if (!gene_Soul.bottledSoulsAllowed) return null;
+            int num = Mathf.FloorToInt((gene_Soul.Max - gene_Soul.Value) / BottledSoulEnergyGain);
             if (num <= 0) return null;
 
-            Thing soulGem = GetSoulGem(pawn, gene_Soul);
-            if (soulGem == null) return null;
-            Job job = JobMaker.MakeJob(JobDefOf.Ingest, soulGem);
-            job.count = Mathf.Min(soulGem.stackCount, num);
+            Thing bottledSoul = GetBottledSoul(pawn, gene_Soul);
+            if (bottledSoul == null) return null;
+            Job job = JobMaker.MakeJob(JobDefOf.Ingest, bottledSoul);
+            job.count = Mathf.Min(bottledSoul.stackCount, num);
             job.ingestTotalCount = true;
             return job;
         }
 
-        private static Thing GetSoulGem(Pawn pawn, Gene_Soul gene_Soul)
+        private static Thing GetBottledSoul(Pawn pawn, Gene_Soul gene_Soul)
         {
 
             Thing carriedThing = pawn.carryTracker.CarriedThing;
@@ -153,6 +153,6 @@ namespace Bernael_Xenotype
             });
         }
 
-        private static float? cachedSoulGenEnergyGain;
+        private static float? cachedBottledSoulEnergyGain;
     }
 }

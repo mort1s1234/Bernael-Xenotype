@@ -81,7 +81,7 @@ namespace Bernael_Xenotype
 
         public bool ShouldConsumeSoulNow()
         {
-            return Value < targetValue && soulBasicGemsAllowed;
+            return Value < targetValue && bottledSoulsAllowed;
         }
 
         public override IEnumerable<Gizmo> GetGizmos()
@@ -103,10 +103,10 @@ namespace Bernael_Xenotype
         public override void ExposeData()
         {
             base.ExposeData();
-            Scribe_Values.Look(ref soulBasicGemsAllowed, "soulBasicGemsAllowed", true);
+            Scribe_Values.Look(ref bottledSoulsAllowed, "soulBasicGemsAllowed", true);
         }
 
-        public bool soulBasicGemsAllowed = true;
+        public bool bottledSoulsAllowed = true;
 
     }
 }

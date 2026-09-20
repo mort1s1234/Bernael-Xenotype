@@ -8,12 +8,12 @@
     </JobDef>
 
     <WorkGiverDef>
-        <defName>Bernael_DeliverSoulgemToPrisoner</defName>
-        <label>deliver soulgem to prisoners</label>
-        <giverClass>Bernael_Xenotype.WorkGiver_Warden_DeliverSoulGem</giverClass>
+        <defName>Bernael_DeliverBottledSoulToPrisoner</defName>
+        <label>deliver bottled souls to prisoners</label>
+        <giverClass>Bernael_Xenotype.WorkGiver_Warden_DeliverBottledSoul</giverClass>
         <workType>Warden</workType>
-        <verb>deliver soulgem for</verb>
-        <gerund>delivering soulgem for</gerund>
+        <verb>deliver a bottled soul for</verb>
+        <gerund>delivering a bottled soul for</gerund>
         <priorityInType>72</priorityInType>
         <requiredCapacities>
             <li>Manipulation</li>
@@ -21,12 +21,12 @@
     </WorkGiverDef>
 
     <WorkGiverDef>
-        <defName>Bernael_FeedSoulgem</defName>
-        <label>administer soulgem</label>
-        <giverClass>Bernael_Xenotype.WorkGiver_AdministerSoulGem</giverClass>
+        <defName>Bernael_FeedBottledSoul</defName>
+        <label>administer a bottled soul</label>
+        <giverClass>Bernael_Xenotype.WorkGiver_AdministerBottledSoul</giverClass>
         <workType>Doctor</workType>
-        <verb>administer soulgem to</verb>
-        <gerund>administering soulgem to</gerund>
+        <verb>administer a bottled soul to</verb>
+        <gerund>administering a bottled soul to</gerund>
         <priorityInType>65</priorityInType>
         <requiredCapacities>
             <li>Manipulation</li>
