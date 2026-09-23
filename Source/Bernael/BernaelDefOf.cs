@@ -39,6 +39,7 @@ namespace Bernael_Xenotype
         public static GeneDef BX_SoulFeeder;
 
         public static ThingDef BX_BottledSoul;
+        public static ThingDef BX_LifeVanquisher;
         public static RecipeDef BX_ExtractSoul;
 
         public static JobDef BX_PrisonerSoulFeed;
