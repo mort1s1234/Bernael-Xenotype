@@ -1,4 +1,15 @@
 <LanguageData>
+    <BX_SoulboundAdoptionTargetInfo>A usable bed, crib, or sleeping spot for a child under the age of 13.</BX_SoulboundAdoptionTargetInfo>
+    <BX_SoulboundAdoptionChildIneligible>This pawn must be a child under the age of 13.</BX_SoulboundAdoptionChildIneligible>
+    <BX_SoulboundAdoptionChildNoBed>The bed, crib, or sleeping spot must be usable by the child.</BX_SoulboundAdoptionChildNoBed>
+    <BX_SoulboundAdoptionAdopterIneligible>The adoptive parent must be a colonist with an active Soulbound Adoption gene.</BX_SoulboundAdoptionAdopterIneligible>
+    <BX_SoulboundAdoptionCooldown>Soulbound Adoption will be ready in {0}.</BX_SoulboundAdoptionCooldown>
+    <BX_SoulboundAdoptionCompleted>{ADOPTER_labelShort} has soulbound-adopted {CHILD_labelShort}.</BX_SoulboundAdoptionCompleted>
+    <BX_SoulboundAdoptionFailed>The soulbound adoption could not be completed.</BX_SoulboundAdoptionFailed>
+    <BX_SoulboundBondChildLabel>bound to {0} — {1} pain</BX_SoulboundBondChildLabel>
+    <BX_SoulboundBondParentLabel>bound to {0}</BX_SoulboundBondParentLabel>
+    <BX_SoulboundBondPainHeader>Pain received through soul bond:</BX_SoulboundBondPainHeader>
+    <BX_SoulboundBondPainLine>{0}: {1}</BX_SoulboundBondPainLine>
 
     <BX_Mutation_CooldownFinished>Awaiting Grace</BX_Mutation_CooldownFinished>
     <BX_Mutation_MutatesIn>{0} usages left before mutation</BX_Mutation_MutatesIn>

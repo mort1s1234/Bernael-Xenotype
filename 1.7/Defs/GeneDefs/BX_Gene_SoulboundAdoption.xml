@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <GeneDef ParentName="FertilityBase">
+    <defName>BX_SoulboundAdoption</defName>
+    <label>soulbound adoption</label>
+    <labelShortAdj>soulbound</labelShortAdj>
+    <description>Carriers of this gene are sterile. To propagate their lineage, they must adopt infants or children and perform a dark adoption ritual. The carrier binds their soul to the child, infuses them with their xenotype, and erases old familial bonds. However, this profound soul-weave forces the carrier to feel every pain suffered by the child. If the child dies before reaching biological age 14, the rupture of the soul-bond kills the parent. Once the adoptee reaches 14, the bond stabilizes vulnerability fades.</description>
+    <geneClass>Bernael_Xenotype.Gene_SoulboundAdoption</geneClass>
+    <iconPath>UI/Icons/Genes/Gene_Sterile</iconPath>
+    <displayOrderInCategory>101</displayOrderInCategory>
+    <sterilize>true</sterilize>
+    <minAgeActive>13</minAgeActive>
+    <biostatMet>1</biostatMet>
+    <biostatCpx>2</biostatCpx>
+    <statFactors>
+      <Fertility>0</Fertility>
+    </statFactors>
+  </GeneDef>
+</Defs>

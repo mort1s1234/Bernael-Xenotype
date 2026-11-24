@@ -147,40 +147,53 @@ namespace Bernael_Xenotype
         {
             DevelopmentalStage? developmentStage = victim.ageTracker?.CurLifeStage?.developmentalStage;
             if (developmentStage is not (DevelopmentalStage.Baby or DevelopmentalStage.Newborn)) return false;
-            /*
-            XenotypeDef targetXenotype = drainer.genes.Xenotype;
-            victim.genes.xenotypeName = drainer.genes.xenotypeName;
-            victim.genes.iconDef = drainer.genes.iconDef;
-            victim.genes.SetXenotypeDirect(targetXenotype);
-            victim.genes.ClearXenogenes();
+
+            return TryConvertChild(drainer, victim);
+        }
+
+        public static bool TryConvertChild(Pawn adopter, Pawn child)
+        {
+            if (adopter?.genes == null || child?.genes == null || adopter.genes.Xenotype == null)
+            {
+                return false;
+            }
+
+            XenotypeDef targetXenotype = adopter.genes.Xenotype;
+            List<Gene> endogenesToRemove = new List<Gene>(child.genes.Endogenes);
+            child.genes.ClearXenogenes();
+            for (int i = 0; i < endogenesToRemove.Count; i++)
+            {
+                child.genes.RemoveGene(endogenesToRemove[i]);
+            }
+            child.genes.xenotypeName = adopter.genes.xenotypeName;
+            child.genes.iconDef = adopter.genes.iconDef;
+            child.genes.SetXenotypeDirect(targetXenotype);
             foreach (GeneDef gene in targetXenotype.genes)
             {
-                victim.genes.AddGene(gene, xenogene: true);
+                child.genes.AddGene(gene, xenogene: true);
             }
-            */
-            victim.TurnIntoXenotype(BernaelDefOf.BX_Bernael);
             List<DirectPawnRelation> relationsToRemove = [];
-            List<DirectPawnRelation> relationList = victim.relations.DirectRelations;
+            List<DirectPawnRelation> relationList = child.relations.DirectRelations;
             foreach (DirectPawnRelation relations in relationList)
             {
                 if (relations.def.familyByBloodRelation)
                 {
-                    MemoryThoughtHandler memories = relations.otherPawn.needs.mood.thoughts.memories;
-                    ThoughtDef thoughtDef = relations.def.GetGenderSpecificDiedThought(victim);
+                    MemoryThoughtHandler memories = relations.otherPawn.needs?.mood?.thoughts?.memories;
+                    ThoughtDef thoughtDef = relations.def.GetGenderSpecificDiedThought(child);
                     if (thoughtDef != null)
                     {
-                        memories.RemoveMemoriesOfDefWhereOtherPawnIs(thoughtDef, victim);
+                        memories?.RemoveMemoriesOfDefWhereOtherPawnIs(thoughtDef, child);
                     }
                     relationsToRemove.Add(relations);
                 }
             }
             foreach (DirectPawnRelation item in relationsToRemove)
             {
-                victim.relations.RemoveDirectRelation(item);
+                child.relations.RemoveDirectRelation(item);
             }
 
-            BabyBondUtility.EstablishBond(drainer, victim);
-            victim.relations.AddDirectRelation(PawnRelationDefOf.Parent, drainer);
+            BabyBondUtility.EstablishBond(adopter, child);
+            child.relations.AddDirectRelation(PawnRelationDefOf.Parent, adopter);
             return true;
         }
 

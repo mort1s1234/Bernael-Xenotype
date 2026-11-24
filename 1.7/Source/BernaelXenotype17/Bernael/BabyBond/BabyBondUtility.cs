@@ -86,33 +86,16 @@ namespace Bernael_Xenotype
         {
             if (feeder?.health?.hediffSet == null) return null;
 
-            List<Hediff> hediffList = feeder.health.hediffSet.hediffs;
-            for (int i = 0; i < hediffList.Count; i++)
-            {
-                if (hediffList[i] is not HediffWithComps hediff) continue;
-                HediffComp_BabyBond_Feeder comp = hediff.TryGetComp<HediffComp_BabyBond_Feeder>();
-                if (comp != null)
-                {
-                    return comp;
-                }
-            }
-            return null;
+            HediffWithComps hediff = feeder.health.hediffSet.GetFirstHediffOfDef(BernaelDefOf.BX_BabyBond_Feeder) as HediffWithComps;
+            return hediff?.TryGetComp<HediffComp_BabyBond_Feeder>();
         }
 
         public static HediffComp_BabyBond_Victim GetBabyComp(Pawn baby)
         {
             if (baby?.health?.hediffSet == null) return null;
 
-            List<Hediff> hediffList = baby.health.hediffSet.hediffs;
-            for (int i = 0; i < hediffList.Count; i++)
-            {
-                if (hediffList[i] is HediffWithComps hediff)
-                {
-                    HediffComp_BabyBond_Victim comp = hediff.TryGetComp<HediffComp_BabyBond_Victim>();
-                    if (comp != null) return comp;
-                }
-            }
-            return null;
+            HediffWithComps hediff = baby.health.hediffSet.GetFirstHediffOfDef(BernaelDefOf.BX_BabyBond_Victim) as HediffWithComps;
+            return hediff?.TryGetComp<HediffComp_BabyBond_Victim>();
         }
     }
 }

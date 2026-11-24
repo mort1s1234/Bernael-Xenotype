@@ -9,10 +9,13 @@ namespace Bernael_Xenotype
 
         public HediffCompProperties_BabyBond_Victim Props => (HediffCompProperties_BabyBond_Victim)props;
 
+        public override string CompLabelInBracketsExtra => BondedFeeder == null ? null : "BX_SoulboundBondParentLabel".Translate(BondedFeeder.LabelShort);
+
         public override bool CompShouldRemove => base.CompShouldRemove || BondedFeeder == null || BondedFeeder.Dead;
 
         private int _tickCounter = 0;
-        private const int CheckInterval = 250;
+        private const int CheckInterval = 60;
+        private float _lastReportedPain = -1f;
 
         public override void CompPostTickInterval(ref float severityAdjustment, int delta)
         {
@@ -22,10 +25,21 @@ namespace Bernael_Xenotype
             if (_tickCounter >= CheckInterval)
             {
                 _tickCounter = 0;
-                DevelopmentalStage developmentStage = Pawn.ageTracker.CurLifeStage.developmentalStage;
-                if (developmentStage is DevelopmentalStage.Adult)
+                if (Pawn.ageTracker.AgeBiologicalYearsFloat >= SoulboundAdoptionUtility.BondReleaseAge)
                 {
                     BabyBondUtility.BreakBond(BondedFeeder, Pawn);
+                    return;
+                }
+
+                float currentPain = Pawn.health.hediffSet.PainTotal;
+                if (_lastReportedPain < 0f || System.Math.Abs(currentPain - _lastReportedPain) > 0.0001f)
+                {
+                    _lastReportedPain = currentPain;
+                    HediffComp_BabyBond_Feeder feederComp = BabyBondUtility.GetFeederComp(BondedFeeder);
+                    if (feederComp != null)
+                    {
+                        BondedFeeder.health.Notify_HediffChanged(feederComp.parent);
+                    }
                 }
             }
         }
@@ -34,7 +48,7 @@ namespace Bernael_Xenotype
         {
             base.Notify_PawnDied(dinfo, culprit);
 
-            if (BondedFeeder == null || BondedFeeder.Dead)
+            if (Pawn.ageTracker.AgeBiologicalYearsFloat >= SoulboundAdoptionUtility.BondReleaseAge || BondedFeeder == null || BondedFeeder.Dead)
             {
                 return;
             }

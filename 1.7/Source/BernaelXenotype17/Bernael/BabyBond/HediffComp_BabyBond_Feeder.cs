@@ -12,6 +12,54 @@ namespace Bernael_Xenotype
 
         public bool IsBonded(Pawn baby) => BondedBabies.Contains(baby);
 
+        public override string CompLabelInBracketsExtra => BondLabel;
+
+        public override string CompTipStringExtra
+        {
+            get
+            {
+                StringBuilder stringBuilder = new StringBuilder();
+                for (int i = 0; i < BondedBabies.Count; i++)
+                {
+                    Pawn child = BondedBabies[i];
+                    if (!TryGetChildPain(child, out float pain))
+                    {
+                        continue;
+                    }
+
+                    if (stringBuilder.Length == 0)
+                    {
+                        stringBuilder.AppendLine("BX_SoulboundBondPainHeader".Translate());
+                    }
+                    stringBuilder.AppendLine("  - " + "BX_SoulboundBondPainLine".Translate(child.LabelShort, pain.ToStringPercent("F0")));
+                }
+                return stringBuilder.ToString().TrimEnd();
+            }
+        }
+
+        private string BondLabel
+        {
+            get
+            {
+                StringBuilder stringBuilder = new StringBuilder();
+                for (int i = 0; i < BondedBabies.Count; i++)
+                {
+                    Pawn child = BondedBabies[i];
+                    if (!TryGetChildPain(child, out float pain))
+                    {
+                        continue;
+                    }
+
+                    if (stringBuilder.Length > 0)
+                    {
+                        stringBuilder.Append(", ");
+                    }
+                    stringBuilder.Append("BX_SoulboundBondChildLabel".Translate(child.LabelShort, pain.ToStringPercent("F0")));
+                }
+                return stringBuilder.ToString();
+            }
+        }
+
         public void AddBaby(Pawn baby)
         {
             if (baby != null && !BondedBabies.Contains(baby))
@@ -40,7 +88,7 @@ namespace Bernael_Xenotype
             if (_tickCounter >= CheckInterval)
             {
                 _tickCounter = 0;
-                PruneDeadBabies();
+                PruneExpiredBonds();
             }
 
         }
@@ -73,9 +121,33 @@ namespace Bernael_Xenotype
             return sb.ToString().TrimEnd();
         }
 
-        private void PruneDeadBabies()
+        private void PruneExpiredBonds()
         {
-            BondedBabies.RemoveAll(p => p == null || p.Dead);
+            for (int i = BondedBabies.Count - 1; i >= 0; i--)
+            {
+                Pawn child = BondedBabies[i];
+                if (child == null || child.Dead)
+                {
+                    BondedBabies.RemoveAt(i);
+                    continue;
+                }
+                if (child.ageTracker.AgeBiologicalYearsFloat >= SoulboundAdoptionUtility.BondReleaseAge)
+                {
+                    BabyBondUtility.BreakBond(Pawn, child);
+                }
+            }
+        }
+
+        private static bool TryGetChildPain(Pawn child, out float pain)
+        {
+            pain = 0f;
+            if (child == null || child.Dead || child.health?.hediffSet == null || child.ageTracker.AgeBiologicalYearsFloat >= SoulboundAdoptionUtility.BondReleaseAge)
+            {
+                return false;
+            }
+
+            pain = child.health.hediffSet.PainTotal;
+            return true;
         }
 
     }

@@ -51,6 +51,7 @@ namespace Bernael_Xenotype
         public static StatDef BX_SoulGainFactor;
         public static GeneDef BX_SoulEater;
         public static GeneDef BX_EssenceHarvest;
+        public static GeneDef BX_SoulboundAdoption;
 
         public static ThingDef BX_CursedFire;
         public static ThingDef BX_WingBurstSmoke;

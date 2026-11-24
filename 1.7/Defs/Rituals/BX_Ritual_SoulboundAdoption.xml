@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <RitualObligationTargetFilterDef>
+    <defName>BX_SoulboundAdoption</defName>
+    <workerClass>Bernael_Xenotype.RitualObligationTargetWorker_SoulboundAdoption</workerClass>
+  </RitualObligationTargetFilterDef>
+
+  <RitualBehaviorDef>
+    <defName>BX_SoulboundAdoption</defName>
+    <workerClass>Bernael_Xenotype.RitualBehaviorWorker_SoulboundAdoption</workerClass>
+    <durationTicks>2500</durationTicks>
+    <roles>
+      <li Class="RitualRoleColonist">
+        <label>adoptive parent</label>
+        <id>adopter</id>
+        <maxCount>1</maxCount>
+        <required>true</required>
+        <countsAsParticipant>false</countsAsParticipant>
+        <allowChild>false</allowChild>
+        <mustBeAbleToReachTarget>true</mustBeAbleToReachTarget>
+      </li>
+      <li Class="Bernael_Xenotype.RitualRole_SoulboundChild">
+        <label>adopted child</label>
+        <id>child</id>
+        <maxCount>1</maxCount>
+        <required>true</required>
+        <countsAsParticipant>false</countsAsParticipant>
+        <allowChild>true</allowChild>
+        <allowBaby>true</allowBaby>
+        <allowDowned>true</allowDowned>
+        <allowKeepLayingDown>true</allowKeepLayingDown>
+        <blocksSocialInteraction>true</blocksSocialInteraction>
+      </li>
+    </roles>
+    <stages>
+      <li Class="RitualStage_InteractWithRole">
+        <targetId>child</targetId>
+        <defaultDuty>SpectateSocial</defaultDuty>
+        <showProgressBar>false</showProgressBar>
+        <endTriggers>
+          <li Class="StageEndTrigger_RoleArrivedOrInTargetBed">
+            <roleIds>
+              <li>child</li>
+            </roleIds>
+          </li>
+        </endTriggers>
+        <roleBehaviors>
+          <li>
+            <roleId>adopter</roleId>
+            <dutyDef>DeliverPawnToBedForBirth</dutyDef>
+            <customPositions>
+              <li Class="RitualPosition_OnInteractionCell" />
+            </customPositions>
+          </li>
+          <li>
+            <roleId>child</roleId>
+            <dutyDef>KeepLyingDown</dutyDef>
+          </li>
+        </roleBehaviors>
+        <postAction Class="RitualStageAction_ClearTag">
+          <roleId>adopter</roleId>
+          <tag>Arrived</tag>
+        </postAction>
+      </li>
+      <li>
+        <defaultDuty>SpectateSocial</defaultDuty>
+        <endTriggers>
+          <li Class="StageEndTrigger_DurationPercentage">
+            <percentage>1</percentage>
+          </li>
+        </endTriggers>
+        <roleBehaviors>
+          <li>
+            <roleId>adopter</roleId>
+            <dutyDef>SpectateSocial</dutyDef>
+            <customPositions>
+              <li Class="RitualPosition_PreferredAdjacentCellCardinal">
+                <faceThing>true</faceThing>
+                <preferredCellSearchPattern Class="ChildBirthCellSearchPattern" />
+              </li>
+            </customPositions>
+          </li>
+          <li>
+            <roleId>child</roleId>
+            <dutyDef>KeepLyingDown</dutyDef>
+          </li>
+        </roleBehaviors>
+      </li>
+    </stages>
+  </RitualBehaviorDef>
+
+  <RitualOutcomeEffectDef>
+    <defName>BX_SoulboundAdoption</defName>
+    <description>The child is transformed into the adoptive parent's xenotype and bound to their soul.</description>
+    <allowAttachableOutcome>false</allowAttachableOutcome>
+    <allowOutcomeWithNoAttendance>true</allowOutcomeWithNoAttendance>
+    <workerClass>Bernael_Xenotype.RitualOutcomeEffectWorker_SoulboundAdoption</workerClass>
+    <comps>
+      <li Class="Bernael_Xenotype.RitualOutcomeComp_SoulboundAdoption" />
+    </comps>
+    <outcomeChances>
+      <li>
+        <label>completed</label>
+        <description>The soulbound adoption is completed.</description>
+        <chance>1</chance>
+        <positivityIndex>1</positivityIndex>
+      </li>
+    </outcomeChances>
+  </RitualOutcomeEffectDef>
+
+  <RitualPatternDef>
+    <defName>BX_SoulboundAdoption</defName>
+    <beginRitualOverride>begin {0}</beginRitualOverride>
+    <ritualOnlyForIdeoMembers>false</ritualOnlyForIdeoMembers>
+    <ritualBehavior>BX_SoulboundAdoption</ritualBehavior>
+    <ritualOutcomeEffect>BX_SoulboundAdoption</ritualOutcomeEffect>
+    <ritualObligationTargetFilter>BX_SoulboundAdoption</ritualObligationTargetFilter>
+    <playsIdeoMusic>false</playsIdeoMusic>
+    <alwaysStartAnytime>true</alwaysStartAnytime>
+    <allowOtherInstances>true</allowOtherInstances>
+  </RitualPatternDef>
+
+  <PreceptDef>
+    <defName>BX_SoulboundAdoption</defName>
+    <label>soulbound adoption</label>
+    <description>Bind a carrier's soul to a child, transforming the child into the carrier's xenotype and erasing old biological ties.</description>
+    <issue>Ritual</issue>
+    <preceptClass>Precept_Ritual</preceptClass>
+    <visible>false</visible>
+    <classic>true</classic>
+    <countsTowardsPreceptLimit>false</countsTowardsPreceptLimit>
+    <selectionWeight>1</selectionWeight>
+    <ritualPatternBase>BX_SoulboundAdoption</ritualPatternBase>
+    <iconPath>UI/Icons/Genes/Gene_Sterile</iconPath>
+    <usesIdeoVisualEffects>false</usesIdeoVisualEffects>
+    <mergeRitualGizmosFromAllIdeos>true</mergeRitualGizmosFromAllIdeos>
+    <useRepeatPenalty>false</useRepeatPenalty>
+    <showRitualFloatMenuOption>false</showRitualFloatMenuOption>
+    <isNonIdeoRitual>true</isNonIdeoRitual>
+  </PreceptDef>
+</Defs>
