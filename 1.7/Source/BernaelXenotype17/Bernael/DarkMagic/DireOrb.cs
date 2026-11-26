@@ -14,13 +14,13 @@ namespace Bernael_Xenotype
 
     public sealed class CompAbilityEffect_DireOrb : CompAbilityEffect_LaunchProjectile
     {
-        public override bool CanApplyOn(LocalTargetInfo target, LocalTargetInfo dest) => Valid(target);
-
         public override void Apply(LocalTargetInfo target, LocalTargetInfo dest)
         {
             if (!Valid(target, true)) return;
             base.Apply(target, dest);
         }
+
+        public override bool CanApplyOn(LocalTargetInfo target, LocalTargetInfo dest) => Valid(target);
 
         public override void DrawEffectPreview(LocalTargetInfo target)
         {
@@ -113,8 +113,10 @@ namespace Bernael_Xenotype
 
         public float Radius => projectile.projectile.explosionRadius;
 
-        /*public bool Affects(Pawn pawn) => pawn == struck ||
-            (faction != null ? pawn.HostileTo(faction) : caster != null && pawn.HostileTo(caster));*/
+        /*
+        public bool Affects(Pawn pawn) => pawn == struck ||
+            (faction != null ? pawn.HostileTo(faction) : caster != null && pawn.HostileTo(caster));
+        */
 
         public void ExposeData()
         {
@@ -138,6 +140,15 @@ namespace Bernael_Xenotype
 
     public sealed class DireOrbMapComponent : MapComponent
     {
+        private sealed class Shockwave
+        {
+            public Vector3 center;
+            public IntVec3 cell;
+            public float radius;
+            public float seed;
+            public int startTick;
+        }
+
         // The orb bursts as it strikes (Mortis, 2026-11-09: no pause or turn before the explosion).
         // The blast's damage and fire follow two ticks later,
         // too soon to see, so a save made in between still restores the pending burst.
@@ -154,8 +165,25 @@ namespace Bernael_Xenotype
         // queue keeps it clear of the map's lighting.
         public static float Altitude => AltitudeLayer.VisEffects.AltitudeFor();
         private List<DireOrbBurst> bursts = new List<DireOrbBurst>();
+        private readonly List<Shockwave> shockwaves = new List<Shockwave>();
         private MaterialPropertyBlock properties;
         public DireOrbMapComponent(Map map) : base(map) { }
+
+        public static void AddShockwave(Map map, Vector3 center, IntVec3 cell, float radius)
+        {
+            if (map == null || radius <= 0f) return;
+            DireOrbMapComponent comp = map.GetComponent<DireOrbMapComponent>();
+            if (comp == null) return;
+            center.y = 0f;
+            comp.shockwaves.Add(new Shockwave
+            {
+                center = center,
+                cell = cell,
+                radius = radius,
+                seed = Rand.Value * 100f,
+                startTick = Find.TickManager?.TicksGame ?? 0
+            });
+        }
 
         public void Burst(Projectile_DireOrb orb, Thing launcher, Pawn struck, float amount, float armorPenetration,
             bool blocked)
@@ -163,12 +191,23 @@ namespace Bernael_Xenotype
             if (orb.def.projectile.explosionRadius <= 0f) return;
             Vector3 center = orb.ExactPosition;
             center.y = 0f;
-            bursts.Add(new DireOrbBurst {
-                projectile = orb.def, caster = launcher as Pawn, faction = launcher?.Faction, struck = struck,
+            bursts.Add(new DireOrbBurst
+            {
+                projectile = orb.def,
+                caster = launcher as Pawn,
+                faction = launcher?.Faction,
+                struck = struck,
                 // Wall hits keep the last open cell, so line of sight starts in front of the wall.
-                center = center, cell = orb.Position, startTick = Find.TickManager.TicksGame,
-                amount = amount, armorPenetration = armorPenetration, seed = orb.Seed,
-                heading = orb.Heading, travelled = orb.Travelled, flight = orb.Flight, blocked = blocked
+                center = center,
+                cell = orb.Position,
+                startTick = Find.TickManager.TicksGame,
+                amount = amount,
+                armorPenetration = armorPenetration,
+                seed = orb.Seed,
+                heading = orb.Heading,
+                travelled = orb.Travelled,
+                flight = orb.Flight,
+                blocked = blocked
             });
         }
 
@@ -181,6 +220,8 @@ namespace Bernael_Xenotype
                 if (!burst.detonated && now - burst.startTick >= DetonateTicks) Detonate(burst);
                 if (now - burst.startTick >= LifetimeTicks) bursts.RemoveAt(i);
             }
+            for (int i = shockwaves.Count - 1; i >= 0; i--)
+                if (now - shockwaves[i].startTick >= Mathf.CeilToInt(BurstSeconds * 60f)) shockwaves.RemoveAt(i);
         }
 
         private void Detonate(DireOrbBurst burst)
@@ -203,20 +244,51 @@ namespace Bernael_Xenotype
                     away.AngleFlat(), burst.caster));
                 if (!victim.Dead && !victim.Downed) victim.stances?.stagger.StaggerFor(StaggerTicks);
             }
-            ThingDef fireDef = DefDatabase<ThingDef>.GetNamed("BX_CursedFire");
             foreach (IntVec3 cell in GenRadial.RadialCellsAround(burst.cell, radius, true))
             {
-                if (!cell.InBounds(map) || !cell.Walkable(map) || cell.GetTerrain(map).IsWater ||
-                    !GenSight.LineOfSight(burst.cell, cell, map, skipFirstCell: true) ||
-                    cell.GetThingList(map).Any(t => t.FireBulwark ||
-                        (t.def.category == ThingCategory.Filth && !t.def.filth.allowsFire))) continue;
-                CursedFire fire = (CursedFire)ThingMaker.MakeThing(fireDef);
-                fire.fireSize = 0.1f;
-                // The lasting flames rise out of the burst from its centre outward, under its erupting flames.
-                fire.ConfigureDireOrb(burst.caster, burst.faction, burst.struck,
-                    6 + Mathf.RoundToInt(cell.DistanceTo(burst.cell) * 3f));
-                GenSpawn.Spawn(fire, cell, map);
+                if (!GenSight.LineOfSight(burst.cell, cell, map, skipFirstCell: true)) continue;
+                CursedFire.TryStartCursedFireIn(
+                    map,
+                    cell,
+                    0.1f,
+                    burst.caster,
+                    burst.faction,
+                    burst.struck,
+                    CursedFire.CalcRadialGrowDelayTicks(burst.cell, cell),
+                    checkCellRules: true
+                );
             }
+        }
+
+        public override void MapComponentDraw()
+        {
+            if (map != Find.CurrentMap || (bursts.Count == 0 && shockwaves.Count == 0) || !DarkMagicAssets.Ready()) return;
+            if (properties == null) properties = new MaterialPropertyBlock();
+            int now = Find.TickManager.TicksGame;
+            foreach (DireOrbBurst burst in bursts)
+                DrawShockwave(now, burst.center, burst.cell, burst.Radius, burst.seed, burst.startTick, burst.heading);
+            foreach (Shockwave wave in shockwaves)
+                DrawShockwave(now, wave.center, wave.cell, wave.radius, wave.seed, wave.startTick, Vector3.zero);
+        }
+
+        private void DrawShockwave(int now, Vector3 center, IntVec3 cell, float radius, float seed, int startTick, Vector3 heading)
+        {
+            if (cell.Fogged(map)) return;
+            float elapsed = (now - startTick) / 60f;
+            // The toon blast is over after 0.6 s and the erupting flames shortly after; the fires remain.
+            if (elapsed > BurstSeconds) return;
+            float size = (radius + BurstMargin) * 2f;
+            properties.Clear();
+            properties.SetFloat("_Phase", elapsed);
+            properties.SetFloat("_Seed", seed);
+            properties.SetFloat("_Opacity", 1f);
+            properties.SetFloat("_Mode", 2f);
+            properties.SetFloat("_Radius", radius);
+            properties.SetFloat("_Size", size);
+            properties.SetVector("_Direction", new Vector4(heading.x, heading.z, 0f, 0f));
+            Vector3 position = center;
+            position.y = Altitude;
+            DarkMagicAssets.Draw(DarkMagicAssets.Orb, position, Quaternion.identity, Vector3.one * size, properties);
         }
 
         public override void ExposeData()
@@ -229,32 +301,10 @@ namespace Bernael_Xenotype
             }
         }
 
-        public override void MapRemoved() => bursts.Clear();
-
-        public override void MapComponentDraw()
+        public override void MapRemoved()
         {
-            if (map != Find.CurrentMap || bursts.Count == 0 || !DarkMagicAssets.Ready()) return;
-            if (properties == null) properties = new MaterialPropertyBlock();
-            int now = Find.TickManager.TicksGame;
-            foreach (DireOrbBurst burst in bursts)
-            {
-                if (burst.cell.Fogged(map)) continue;
-                float elapsed = (now - burst.startTick) / 60f;
-                // The toon blast is over after 0.6 s and the erupting flames shortly after; the fires remain.
-                if (elapsed > BurstSeconds) continue;
-                float size = (burst.Radius + BurstMargin) * 2f;
-                properties.Clear();
-                properties.SetFloat("_Phase", elapsed);
-                properties.SetFloat("_Seed", burst.seed);
-                properties.SetFloat("_Opacity", 1f);
-                properties.SetFloat("_Mode", 2f);
-                properties.SetFloat("_Radius", burst.Radius);
-                properties.SetFloat("_Size", size);
-                properties.SetVector("_Direction", new Vector4(burst.heading.x, burst.heading.z, 0f, 0f));
-                Vector3 position = burst.center;
-                position.y = Altitude;
-                DarkMagicAssets.Draw(DarkMagicAssets.Orb, position, Quaternion.identity, Vector3.one * size, properties);
-            }
+            bursts.Clear();
+            shockwaves.Clear();
         }
     }
 }

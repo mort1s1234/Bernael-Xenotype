@@ -14,7 +14,7 @@ namespace Bernael_Xenotype
     	{
 			IncidentDef raidIncident = IncidentDefOf.RaidEnemy;
 			IncidentParms raidParms = StorytellerUtility.DefaultParmsNow(raidIncident.category, SingleMap);
-			PawnKindDef bogeymanKind = BernaelDefOf.BX_Bernael_Warlock;
+			PawnKindDef bogeymanKind = BernaelDefOf.BX_Caligo_Bogeyman;
 			raidParms.faction = FactionUtility.DefaultFactionFrom(bogeymanKind.defaultFactionDef) ?? Find.FactionManager.RandomEnemyFaction();
 
 			if(!HasBabyOrChildVictim(SingleMap))

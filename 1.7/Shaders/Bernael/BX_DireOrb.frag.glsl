@@ -364,7 +364,12 @@ vec4 standing(vec2 uv)
     uv.y/=breathe;
     uv.x=(uv.x-0.5)/(1+0.03*sin(t*5.1+s))+0.5;
     uv.x+=sin(uv.y*4.2-t*4.6+s)*0.035*uv.y*uv.y;
-    return frame(uv,t+s)*bxSmoothstep(0,0.25,grow);
+    // Smoothly fade out near the top of the flame UV space so the flame tip never hits a hard top cutoff.
+    float topFade=1.0-bxSmoothstep(0.88,0.99,uv.y);
+    float sideFade=(1.0-bxSmoothstep(0.44,0.50,abs(uv.x-0.5)));
+    float edgeMask=clamp(topFade*sideFade,0.0,1.0);
+    vec4 c=frame(uv,t+s)*bxSmoothstep(0,0.25,grow);
+    return c*edgeMask;
 }
 
 void main()

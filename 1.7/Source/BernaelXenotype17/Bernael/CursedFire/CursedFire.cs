@@ -244,6 +244,11 @@ namespace Bernael_Xenotype
             pawnFire.struck = struck;
             pawnFire.AttachTo(t);
             GenSpawn.Spawn(pawnFire, position, map, Rot4.North);
+            if (pawnFire.TryGetComp<CompGlower>(out var glower) && map != null)
+            {
+                map.glowGrid.DeRegisterGlower(glower);
+                map.mapDrawer.MapMeshDirty(position, MapMeshFlagDefOf.Things);
+            }
         }
 
         private void DoCursedDamage(Thing target)
@@ -269,6 +274,29 @@ namespace Bernael_Xenotype
             {
                 target.TakeDamage(new DamageInfo(damage, damageAmount, 0f, -1f, instigator ?? this));
             }
+        }
+
+        public static int CalcRadialGrowDelayTicks(IntVec3 origin, IntVec3 cell, int baseDelay = 6, float ticksPerCell = 3f)
+            => baseDelay + Mathf.RoundToInt(cell.DistanceTo(origin) * ticksPerCell);
+
+        public static bool TryStartCursedFireIn(Map map, IntVec3 cell, float fireSize, Thing instigator,
+            Faction faction = null, Pawn struck = null, int growDelayTicks = 0, bool checkCellRules = true)
+        {
+            if (map == null || !cell.InBounds(map)) return false;
+            if (checkCellRules)
+            {
+                if (!cell.Walkable(map) || cell.GetTerrain(map).IsWater) return false;
+                bool blocked = cell.GetThingList(map).Any(t => t.FireBulwark ||
+                    (t.def.category == ThingCategory.Filth && !t.def.filth.allowsFire));
+                if (blocked) return false;
+            }
+            ThingDef fireDef = BernaelDefOf.BX_CursedFire ?? DefDatabase<ThingDef>.GetNamed("BX_CursedFire");
+            CursedFire fire = (CursedFire)ThingMaker.MakeThing(fireDef);
+            fire.fireSize = fireSize;
+            fire.ConfigureDireOrb(instigator as Pawn, faction ?? instigator?.Faction, struck, growDelayTicks);
+            fire.instigator = instigator;
+            GenSpawn.Spawn(fire, cell, map, Rot4.North);
+            return true;
         }
     }
 }

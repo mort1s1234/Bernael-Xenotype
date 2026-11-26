@@ -104,4 +104,41 @@
     </modExtensions>
   </VEF.Abilities.AbilityDef>
 
+  <!-- VPE level-4 psycast; the dedicated dev actions grant them immediately. -->
+
+  <VEF.Abilities.AbilityDef ParentName="VPE_PsycastBase">
+    <defName>BX_ShadowMire</defName>
+    <label>shadow mire</label>
+    <description>Draw a pool of midnight-blue oil from the Fold. Everyone caught in it moves 40% slower, including the caster and their allies. Pairs of pale boils mark where pillars of cursed flame will erupt. Each pillar strikes its own cell and the eight neighboring cells covered by the mire. Creatures hit suffer frostbite and carry the cursed flame with them, even after leaving the pool.\n\nThe mire covers open ground within 7.37 cells for 8 seconds. Walls shelter creatures on the far side.</description>
+    <abilityClass>VEF.Abilities.Ability_Blank</abilityClass>
+    <iconPath>UI/Icons/Abilities/BX_ShadowMire</iconPath>
+    <cooldownTime>1800</cooldownTime>
+    <warmupSound>BX_Cast1</warmupSound>
+		<castTime>72</castTime> <!-- tick -->
+		<range>24.9</range>
+    <radius>7.37</radius>
+    <targetingParameters>
+      <canTargetLocations>true</canTargetLocations>
+      <canTargetPawns>false</canTargetPawns>
+      <canTargetBuildings>false</canTargetBuildings>
+      <canTargetSelf>false</canTargetSelf>
+    </targetingParameters>
+    <modExtensions>
+			<li Class="VanillaPsycastsExpanded.AbilityExtension_Psycast">
+				<path>BX_Hexes</path>
+				<level>4</level>
+				<order>1</order>
+				<psyfocusCost>0.06</psyfocusCost>
+				<entropyGain>40</entropyGain>
+				<prerequisites>
+					<li>BX_MaliciousSeal</li>
+					<li>BX_DireOrb</li>
+				</prerequisites>
+			</li>
+      <li Class="Bernael_Xenotype.AbilityExtension_ShadowMire">
+        <fieldDef>BX_ShadowMireField</fieldDef>
+      </li>
+    </modExtensions>
+  </VEF.Abilities.AbilityDef>
+
 </Defs>

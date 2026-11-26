@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <FactionDef ParentName="FactionBase">
+    <defName>BX_SovereignsCaligo</defName>
+    <label>sovereigns of caligo</label>
+    <categoryTag>BX_CaligoCult</categoryTag>
+    <description>An ultratech cult devoted to Caligo and the entropic demons of the Fold. Their society is governed by a harsh, rigid hierarchy where an individual's worth is measured solely by psychic sensitivity and psylink level.
+
+Stripped of traditional mercy, laws, or nobility titles, they divide humanity into three absolute castes. At the apex stand the Warlocks—Bernaels and power-consumed humans who act as direct conduits for Caligo's will. Beneath them are the Renegades, former Imperial psionics and rimworld prodigies who joined to shatter Imperial restraints, freely incinerating minds and siphoning souls. At the very bottom languish the Vessels: nameless, rightless non-psionics and captives reduced to living shields and biological batteries for their superiors.
+
+Worshipping the cursed flame as Caligo's direct manifestation, they view the psychically blind not as people, but as mere resources to be harvested.</description>
+    <pawnSingular>cultist</pawnSingular>
+    <pawnsPlural>cultists</pawnsPlural>
+    <settlementGenerationWeight>0.5</settlementGenerationWeight>
+    <requiredCountAtGameStart>1</requiredCountAtGameStart>
+    <canSiege>true</canSiege>
+    <canStageAttacks>true</canStageAttacks>
+    <leaderTitle>master of the fold</leaderTitle>
+    <!--<royalFavorLabel>honor</royalFavorLabel>
+    <royalFavorIconPath>UI/Icons/RoyalFavor</royalFavorIconPath>-->
+    <leaderForceGenerateNewPawn>true</leaderForceGenerateNewPawn>
+    <fixedName>Sovereigns of caligo</fixedName>
+    <factionIconPath>World/WorldObjects/Expanding/Empire</factionIconPath>
+    <hidden>true</hidden><!-- hidden -->
+    <naturalEnemy>true</naturalEnemy>
+    <autoFlee>false</autoFlee>
+    <humanlikeFaction>true</humanlikeFaction>
+    <hostileToFactionlessHumanlikes>true</hostileToFactionlessHumanlikes>
+    <factionNameMaker>NamerFactionEmpire</factionNameMaker>
+    <settlementNameMaker>NamerSettlementEmpire</settlementNameMaker>
+    <allowedCultures>
+      <li>Sophian</li>
+    </allowedCultures>
+    <arrivalLayerWhitelist>
+      <li>Surface</li>
+      <li MayRequire="Ludeon.RimWorld.Odyssey">Orbit</li>
+    </arrivalLayerWhitelist>
+    <requiredMemes>
+      <li MayRequire="Ludeon.RimWorld.Ideology">Collectivist</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">Supremacist</li>
+    </requiredMemes>
+    <allowedMemes>
+      <li MayRequire="Ludeon.RimWorld.Ideology">Collectivist</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">Supremacist</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">HumanPrimacy</li>
+    </allowedMemes>
+    <disallowedPrecepts>
+      <li>Slavery_Classic</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">Slavery_Disapproved</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">Slavery_Horrible</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">Slavery_Abhorrent</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">IdeoDiversity_Abhorrent</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">IdeoDiversity_Horrible</li>
+    </disallowedPrecepts>
+    <structureMemeWeights>
+      <Structure_Archist MayRequire="Ludeon.RimWorld.Ideology">1</Structure_Archist>
+    </structureMemeWeights>
+    <xenotypeSet>
+      <xenotypeChances>
+        <BX_Bernael MayRequire="Ludeon.RimWorld.Biotech">0.025</BX_Bernael>
+        <Neanderthal MayRequire="Ludeon.RimWorld.Biotech">0.05</Neanderthal>
+        <Hussar MayRequire="Ludeon.RimWorld.Biotech">0.15</Hussar>
+        <Genie MayRequire="Ludeon.RimWorld.Biotech">0.05</Genie>
+        <Starjack MayRequire="Ludeon.RimWorld.Biotech,Ludeon.RimWorld.Odyssey">0.025</Starjack>
+      </xenotypeChances>
+    </xenotypeSet>
+    <!-- <permanentEnemyToEveryoneExcept>
+      <li>OutlanderCivil</li>
+      <li>TribeCivil</li>
+      <li>PlayerTribe</li>
+      <li>PlayerColony</li>
+      <li>Ancients</li>
+      <li>Empire</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">Beggars</li>
+      <li MayRequire="Ludeon.RimWorld.Anomaly">ResearchExpedition</li>
+      <li MayRequire="Ludeon.RimWorld.Odyssey">GravshipCrew</li>
+      <li MayRequire="Ludeon.RimWorld.Odyssey">TradersGuild</li>
+    </permanentEnemyToEveryoneExcept> -->
+    <techLevel>Ultra</techLevel>
+    <backstoryFilters>
+      <li>
+        <categories>
+          <li>ImperialCommon</li>
+          <li>Outlander</li>
+        </categories>
+      </li>
+    </backstoryFilters>
+    <apparelStuffFilter>
+      <stuffCategoriesToAllow>
+        <li>Metallic</li>
+        <li>Fabric</li>
+      </stuffCategoriesToAllow>
+      <disallowedThingDefs>
+        <li>DevilstrandCloth</li>
+      </disallowedThingDefs>
+    </apparelStuffFilter>
+    <allowedArrivalTemperatureRange>-50~45</allowedArrivalTemperatureRange>
+    <settlementTexturePath>World/WorldObjects/DefaultSettlement</settlementTexturePath>
+    <colorSpectrum>
+      <li>(0.55, 0.08, 0.08)</li> <!-- Bernael red -->
+      <li>(0.12, 0.22, 0.35)</li> <!-- Caligo blue -->
+    </colorSpectrum>
+    <fixedLeaderKinds>
+      <li>BX_Caligo_HighWarlock</li>
+    </fixedLeaderKinds>
+    <!--<royalTitleTags>
+      <li>EmpireTitle</li>
+    </royalTitleTags>
+    <baseTraderKinds>
+      <li>Base_Empire_Standard</li>
+    </baseTraderKinds>
+    <caravanTraderKinds>
+      <li>Empire_Caravan_TraderGeneral</li>
+    </caravanTraderKinds>
+    <royalTitleInheritanceWorkerClass>RoyalTitleInheritanceWorker</royalTitleInheritanceWorkerClass>
+    <royalTitleInheritanceRelations>
+      <li>Child</li>
+      <li>Grandchild</li>
+      <li>GreatGrandchild</li>
+      <li>NephewOrNiece</li>
+      <li>Spouse</li>
+      <li>Sibling</li>
+      <li>HalfSibling</li>
+      <li>Cousin</li>
+      <li>Parent</li>
+      <li>UncleOrAunt</li>
+    </royalTitleInheritanceRelations>-->
+    <raidCommonalityFromPointsCurve>
+      <points>
+        <li>(0, 1)</li> <!--Constant 1 at all points levels-->
+      </points>
+    </raidCommonalityFromPointsCurve>
+    <raidLootMaker>EmpireRaidLootMaker</raidLootMaker>
+    <maxPawnCostPerTotalPointsCurve>
+      <points>
+        <li>(500, 120)</li> <!-- Can always use relatively strong pawns, because empire doesn't really have weak ones -->
+        <li>(1000, 200)</li>
+        <li>(2000, 350)</li>
+        <li>(2001, 10000)</li>
+      </points>
+    </maxPawnCostPerTotalPointsCurve>
+    <fixedIdeo>true</fixedIdeo>
+    <ideoName>Psionic Supremacy</ideoName>
+    <ideoDescription>Mind is absolute, flesh is secondary. All material reality is perceived as an imperfect layer dominated by the Fold—a measurable psychic space and the source of true energy.
+
+Sentient beings with psychic potential are born to command and evolve. Ordinary people without psychic abilities lack spiritual meaning and are viewed as mere resources, slaves, or fuel for rituals. The cult reveres entropic demons born from spatial rifts in the Fold and worships the cursed flame as a direct manifestation of Caligo.</ideoDescription>
+    <hiddenIdeo>false</hiddenIdeo>
+    <pawnGroupMakers>
+      <!-- Traders
+      <li>
+        <kindDef>Trader</kindDef>
+        <traders>
+          <Empire_Common_Trader>1</Empire_Common_Trader>
+        </traders>
+        <carriers>
+          <Muffalo>6</Muffalo>
+          <Dromedary>5</Dromedary>
+          <Alpaca>2</Alpaca>
+          <Elephant>1</Elephant>
+        </carriers>
+        <guards>
+          <Villager>3</Villager>
+          <Empire_Fighter_Trooper>10</Empire_Fighter_Trooper>
+          <Empire_Fighter_Cataphract>1.5</Empire_Fighter_Cataphract>
+          <Empire_Fighter_Janissary>7</Empire_Fighter_Janissary>
+          <Empire_Fighter_Champion>10</Empire_Fighter_Champion>
+        </guards>
+      </li> -->
+      <li>
+        <!-- Normal fights -->
+        <kindDef>Combat</kindDef>
+        <commonality>100</commonality>
+        <options>
+          <BX_Caligo_Vessel>6</BX_Caligo_Vessel>
+          <BX_Caligo_Imperial_Deserter>5</BX_Caligo_Imperial_Deserter>
+          <BX_Caligo_Sniper>3.5</BX_Caligo_Sniper>
+          <BX_Caligo_Heavy>2</BX_Caligo_Heavy>
+          <BX_Caligo_Slasher>4</BX_Caligo_Slasher>
+        </options>
+      </li>
+      <li>
+        <!-- breach fights -->
+        <kindDef>Combat</kindDef>
+        <commonality>10</commonality>
+        <options>
+          <BX_Caligo_Vessel>6</BX_Caligo_Vessel>
+          <Empire_Fighter_Grenadier>2</Empire_Fighter_Grenadier>
+          <BX_Caligo_Imperial_Deserter>5</BX_Caligo_Imperial_Deserter>
+          <BX_Caligo_Sniper>3.5</BX_Caligo_Sniper>
+          <BX_Caligo_Heavy>2</BX_Caligo_Heavy>
+          <BX_Caligo_Slasher>4</BX_Caligo_Slasher>
+        </options>
+      </li>
+      <li>
+        <!-- demons fights -->
+        <kindDef>Combat</kindDef>
+        <commonality>10</commonality>
+        <options>
+          <BX_Caligo_Vessel>6</BX_Caligo_Vessel>
+          <BX_Caligo_Imperial_Deserter>2.5</BX_Caligo_Imperial_Deserter>
+          <BX_Caligo_Sniper>1.75</BX_Caligo_Sniper>
+          <BX_Caligo_Heavy>1</BX_Caligo_Heavy>
+          <BX_Caligo_Slasher>2</BX_Caligo_Slasher>
+          <BX_Caligo_Warlock>1</BX_Caligo_Warlock>
+          <BX_DarkDemon>2</BX_DarkDemon>
+        </options>
+      </li>
+      <li>
+        <!-- Base defense -->
+        <kindDef>Settlement</kindDef>
+        <options>
+          <BX_Caligo_Vessel>6</BX_Caligo_Vessel>
+          <BX_Caligo_Imperial_Deserter>5</BX_Caligo_Imperial_Deserter>
+          <BX_Caligo_Sniper>3.5</BX_Caligo_Sniper>
+          <BX_Caligo_Heavy>2</BX_Caligo_Heavy>
+          <BX_Caligo_Slasher>4</BX_Caligo_Slasher>
+          <BX_Caligo_Warlock>1</BX_Caligo_Warlock>
+        </options>
+      </li>
+    </pawnGroupMakers>
+    <maxConfigurableAtWorldCreation>1</maxConfigurableAtWorldCreation>
+    <configurationListOrderPriority>2500</configurationListOrderPriority>
+    <disallowedRaidAgeRestrictions>
+      <li MayRequire="Ludeon.RimWorld.Biotech">Children</li>
+    </disallowedRaidAgeRestrictions>
+  </FactionDef>
+
+</Defs>

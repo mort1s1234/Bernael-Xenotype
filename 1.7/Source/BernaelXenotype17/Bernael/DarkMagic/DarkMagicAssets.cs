@@ -28,9 +28,9 @@ namespace Bernael_Xenotype
             Seal = new Material(seal) { name = "Bernael Malicious Seal (shared)" };
             Orb = new Material(orb) { name = "Bernael Dire Orb (shared)" };
             // Use the same authored flames as the lasting ground fire.
-            Orb.SetTexture("_FlameA", ContentFinder<Texture2D>.Get("Things/CursedFlame/CursedFlame_A"));
-            Orb.SetTexture("_FlameB", ContentFinder<Texture2D>.Get("Things/CursedFlame/CursedFlame_B"));
-            Orb.SetTexture("_FlameC", ContentFinder<Texture2D>.Get("Things/CursedFlame/CursedFlame_C"));
+            Orb.SetTexture("_FlameA", PrepareFlameTexture(ContentFinder<Texture2D>.Get("Things/CursedFlame/CursedFlame_A")));
+            Orb.SetTexture("_FlameB", PrepareFlameTexture(ContentFinder<Texture2D>.Get("Things/CursedFlame/CursedFlame_B")));
+            Orb.SetTexture("_FlameC", PrepareFlameTexture(ContentFinder<Texture2D>.Get("Things/CursedFlame/CursedFlame_C")));
             Quad = new Mesh { name = "Dark magic UV plane" };
             Quad.vertices = new[] { new Vector3(-0.5f, 0, -0.5f), new Vector3(-0.5f, 0, 0.5f),
                 new Vector3(0.5f, 0, 0.5f), new Vector3(0.5f, 0, -0.5f) };
@@ -39,6 +39,13 @@ namespace Bernael_Xenotype
             Quad.RecalculateBounds();
             Quad.UploadMeshData(true);
             return true;
+        }
+
+        private static Texture2D PrepareFlameTexture(Texture2D source)
+        {
+            if (source == null) return null;
+            source.wrapMode = TextureWrapMode.Clamp;
+            return source;
         }
 
         // Rotates the quad so uv.x runs along delta; both shaders put their strip start at uv.x = 0.

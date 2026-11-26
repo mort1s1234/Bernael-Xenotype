@@ -4,7 +4,11 @@
   <ThingDef>
     <defName>BX_BottledSoul</defName>
     <label>Bottled Soul essence</label>
-    <description>Bottled Soul essence</description>
+    <description>Concentrated psychic essence harvested from living beings. All living creatures carry a soul, though animals and mechanoids bear only faint or weak echoes.
+    
+Bernaels rely entirely on this resource to sustain their survival, nature, and psionic power.
+
+It can also be extracted from downed entropic demons, though doing so kills them immediately without triggering their death explosion.</description>
     <category>Item</category>
     <thingClass>ThingWithComps</thingClass>
     <drawerType>MapMeshOnly</drawerType>
