@@ -79,7 +79,7 @@ namespace Bernael_Xenotype
         public static IncidentDef BX_PsychicRupture;
         public static IncidentDef BX_Bogeyman;
 
-        public static PawnKindDef BX_Bernael_Warlock;
+        public static PawnKindDef BX_Caligo_Bogeyman;
 
         public static SoundDef BX_Ambient_Gaze;
         public static SoundDef BX_Gaze_Blink;

@@ -24,7 +24,7 @@
   <DamageDef>
     <defName>BX_CursedFlame</defName>
     <label>cursed flame</label>
-    <workerClass>DamageWorker_AddInjury</workerClass>
+    <workerClass>Bernael_Xenotype.DamageWorker_CursedFlame</workerClass>
     <externalViolence>true</externalViolence>
     <hasForcefulImpact>false</hasForcefulImpact>
     <makesBlood>false</makesBlood>
@@ -35,6 +35,7 @@
     <minDamageToFragment>15</minDamageToFragment>
     <defaultDamage>10</defaultDamage>
     <defaultArmorPenetration>0</defaultArmorPenetration>
+    <soundExplosion>Explosion_Flame</soundExplosion>
     <combatLogRules>Damage_Flame</combatLogRules>
     <harmAllLayersUntilOutside>true</harmAllLayersUntilOutside>
     <canUseDeflectMetalEffect>false</canUseDeflectMetalEffect>
@@ -47,10 +48,29 @@
     </additionalHediffs>
   </DamageDef>
 
+  <ToolCapacityDef>
+    <defName>BX_CursedFlame</defName>
+    <label>cursed flame</label>
+  </ToolCapacityDef>
+
+  <ManeuverDef>
+    <defName>BX_CursedFlame</defName>
+    <requiredCapacity>BX_CursedFlame</requiredCapacity>
+    <verb>
+      <verbClass>Verb_MeleeAttackDamage</verbClass>
+      <meleeDamageDef>BX_CursedFlame</meleeDamageDef>
+    </verb>
+    <logEntryDef>MeleeAttack</logEntryDef>
+    <combatLogRulesHit>Maneuver_Scratch_MeleeHit</combatLogRulesHit>
+    <combatLogRulesDeflect>Maneuver_Scratch_MeleeDeflect</combatLogRulesDeflect>
+    <combatLogRulesMiss>Maneuver_Scratch_MeleeMiss</combatLogRulesMiss>
+    <combatLogRulesDodge>Maneuver_Scratch_MeleeDodge</combatLogRulesDodge>
+  </ManeuverDef>
+
   <DamageDef>
     <defName>BX_ShadowMireFlame</defName>
     <label>mire flame</label>
-    <workerClass>DamageWorker_AddInjury</workerClass>
+    <workerClass>Bernael_Xenotype.DamageWorker_CursedFlame</workerClass>
     <externalViolence>true</externalViolence>
     <hasForcefulImpact>false</hasForcefulImpact>
     <makesBlood>false</makesBlood>

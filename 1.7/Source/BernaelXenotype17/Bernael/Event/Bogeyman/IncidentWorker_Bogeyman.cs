@@ -57,7 +57,7 @@ namespace Bernael_Xenotype
             IntVec3 spawnCell = TryFindSpawnCell(map);
             if (!spawnCell.IsValid) return false;
 
-            PawnKindDef bogeymanKind = BernaelDefOf.BX_Bernael_Warlock; // PawnKindDef
+            PawnKindDef bogeymanKind = BernaelDefOf.BX_Caligo_Bogeyman; // PawnKindDef
             Faction faction = FactionUtility.DefaultFactionFrom(bogeymanKind.defaultFactionDef) ?? Find.FactionManager.RandomEnemyFaction();
 
             Pawn bogeyman = PawnGenerator.GeneratePawn(bogeymanKind, faction);

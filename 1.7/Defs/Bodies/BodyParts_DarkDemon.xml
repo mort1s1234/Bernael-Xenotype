@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <BodyPartDef>
+    <defName>BX_SpectralCore</defName>
+    <label>spectral core</label>
+    <hitPoints>25</hitPoints>
+    <bleedRate>0</bleedRate>
+    <skinCovered>false</skinCovered>
+    <solid>true</solid>
+    <permanentInjuryChanceFactor>0</permanentInjuryChanceFactor>
+    <canSuggestAmputation>false</canSuggestAmputation>
+    <tags>
+      <li>BloodPumpingSource</li>
+      <li>BloodFiltrationSource</li>
+      <li>MetabolismSource</li>
+      <li>BreathingSource</li>
+    </tags>
+  </BodyPartDef>
+
+  <BodyPartDef>
+    <defName>BX_AbyssalShell</defName>
+    <label>abyssal shell</label>
+    <hitPoints>40</hitPoints>
+    <bleedRate>0</bleedRate>
+    <frostbiteVulnerability>0.5</frostbiteVulnerability>
+    <skinCovered>false</skinCovered>
+    <solid>true</solid>
+    <permanentInjuryChanceFactor>0</permanentInjuryChanceFactor>
+    <destroyableByDamage>false</destroyableByDamage>
+    <tags>
+      <li>BreathingSourceCage</li>
+    </tags>
+  </BodyPartDef>
+
+  <BodyPartDef>
+    <defName>BX_VoidMind</defName>
+    <label>void mind</label>
+    <hitPoints>20</hitPoints>
+    <bleedRate>0</bleedRate>
+    <skinCovered>false</skinCovered>
+    <permanentInjuryChanceFactor>0</permanentInjuryChanceFactor>
+    <canSuggestAmputation>false</canSuggestAmputation>
+    <tags>
+      <li>ConsciousnessSource</li>
+    </tags>
+  </BodyPartDef>
+
+  <BodyPartDef>
+    <defName>BX_SpectralEye</defName>
+    <label>spectral eye</label>
+    <hitPoints>15</hitPoints>
+    <bleedRate>0</bleedRate>
+    <skinCovered>false</skinCovered>
+    <socketed>true</socketed>
+    <permanentInjuryChanceFactor>0</permanentInjuryChanceFactor>
+    <tags>
+      <li>SightSource</li>
+    </tags>
+  </BodyPartDef>
+
+  <BodyPartDef>
+    <defName>BX_SpectralClawLimb</defName>
+    <label>spectral claw</label>
+    <hitPoints>30</hitPoints>
+    <bleedRate>0</bleedRate>
+    <skinCovered>false</skinCovered>
+    <permanentInjuryChanceFactor>0</permanentInjuryChanceFactor>
+    <tags>
+      <li>ManipulationLimbCore</li>
+    </tags>
+  </BodyPartDef>
+
+  <BodyPartDef>
+    <defName>BX_PhantasmalDrift</defName>
+    <label>phantasmal drift</label>
+    <hitPoints>25</hitPoints>
+    <bleedRate>0</bleedRate>
+    <skinCovered>false</skinCovered>
+    <permanentInjuryChanceFactor>0</permanentInjuryChanceFactor>
+    <tags>
+      <li>MovingLimbCore</li>
+    </tags>
+  </BodyPartDef>
+
+</Defs>

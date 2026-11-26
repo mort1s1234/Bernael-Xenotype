@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <PawnRenderTreeDef>
+    <defName>BX_DarkDemonRenderTree</defName>
+    <root Class="PawnRenderNodeProperties_Parent">
+      <debugLabel>Root</debugLabel>
+      <tagDef>Root</tagDef>
+      <children>
+        <li>
+          <debugLabel>Body</debugLabel>
+          <tagDef>Body</tagDef>
+          <nodeClass>PawnRenderNode_AnimalPart_Body</nodeClass>
+          <workerClass>PawnRenderNodeWorker_AnimalBody</workerClass>
+          <texPath>Things/Pawn/DarkDemon/DarkDemon</texPath>
+          <useRottenColor>true</useRottenColor>
+          <children>
+            <li>
+              <debugLabel>Wounds</debugLabel>
+              <nodeClass>PawnRenderNode_AnimalPart</nodeClass>
+              <workerClass>PawnRenderNodeWorker_OverlayWounds</workerClass>
+              <overlayLayer>Body</overlayLayer>
+              <useGraphic>false</useGraphic>
+              <baseLayer>3</baseLayer>
+            </li>
+            <li>
+              <debugLabel>Firefoam</debugLabel>
+              <nodeClass>PawnRenderNode_AnimalPart</nodeClass>
+              <workerClass>PawnRenderNodeWorker_OverlayFirefoam</workerClass>
+              <overlayLayer>Body</overlayLayer>
+              <useGraphic>false</useGraphic>
+              <baseLayer>5</baseLayer>
+            </li>
+            <li Class="Bernael_Xenotype.PawnRenderNodeProperties_Hand">
+              <debugLabel>BX_DarkDemon_HandLeft</debugLabel>
+              <texPath>Things/Pawn/DarkDemon/Hands/HandL</texPath>
+              <drawSize>(1.2, 1.2)</drawSize>
+              <baseLayer>25</baseLayer>
+              <rotDrawMode>Fresh, Rotting</rotDrawMode>
+              <side>Center</side>
+
+              <linkedBodyPartsGroup>LeftBlade</linkedBodyPartsGroup>
+              <isLeftHand>true</isLeftHand>
+              <hideWhenDead>true</hideWhenDead>
+              <deadLayerOffset>0.15</deadLayerOffset>
+              <!-- Hand Position -->
+              <northOffset>(-0.65, 0.00, -0.2)</northOffset>
+              <eastOffset>(0.0, 0.01, -0.25)</eastOffset>
+              <southOffset>(0.65, 0.01, -0.2)</southOffset>
+              <westOffset>(0.15, 0.01, -0.25)</westOffset>
+              <!-- Melee Attack -->
+              <northSwingDeltaOffset>(-0.05, 0.0, 0.5)</northSwingDeltaOffset>
+              <eastSwingDeltaOffset>(0.5, 0.0, -0.05)</eastSwingDeltaOffset>
+              <southSwingDeltaOffset>(-0.05, 0.0, -0.5)</southSwingDeltaOffset>
+              <westSwingDeltaOffset>(-0.5, 0.0, -0.05)</westSwingDeltaOffset>
+              <northSwingAngleDeg>25</northSwingAngleDeg>
+              <eastSwingAngleDeg>55</eastSwingAngleDeg>
+              <southSwingAngleDeg>-25</southSwingAngleDeg>
+              <westSwingAngleDeg>55</westSwingAngleDeg>
+              <!-- Cast Ability -->
+              <northCastRaiseOffset>(0, 0, 0.5)</northCastRaiseOffset>
+              <eastCastRaiseOffset>(0, 0, 0.5)</eastCastRaiseOffset>
+              <southCastRaiseOffset>(0, 0, 0.5)</southCastRaiseOffset>
+              <westCastRaiseOffset>(0, 0, 0.5)</westCastRaiseOffset>
+              <northCastRaiseAngleDeg>90</northCastRaiseAngleDeg>
+              <eastCastRaiseAngleDeg>90</eastCastRaiseAngleDeg>
+              <southCastRaiseAngleDeg>-180</southCastRaiseAngleDeg>
+              <westCastRaiseAngleDeg>90</westCastRaiseAngleDeg>
+
+              <fallbackTint>(1, 1, 1, 1)</fallbackTint>
+            </li>
+            <li Class="Bernael_Xenotype.PawnRenderNodeProperties_Hand">
+              <debugLabel>BX_DarkDemon_HandRight</debugLabel>
+              <texPath>Things/Pawn/DarkDemon/Hands/HandR</texPath>
+              <drawSize>(1.2, 1.2)</drawSize>
+              <baseLayer>25</baseLayer>
+              <rotDrawMode>Fresh, Rotting</rotDrawMode>
+              <side>Center</side>
+
+              <linkedBodyPartsGroup>RightBlade</linkedBodyPartsGroup>
+              <isLeftHand>false</isLeftHand>
+              <hideWhenDead>true</hideWhenDead>
+              <deadLayerOffset>0.15</deadLayerOffset>
+              <!-- Hand Position -->
+              <northOffset>(0.65, 0.00, -0.2)</northOffset>
+              <eastOffset>(-0.15, 0.01, -0.25)</eastOffset>
+              <southOffset>(-0.65, 0.01, -0.2)</southOffset>
+              <westOffset>(0.0, 0.01, -0.25)</westOffset>
+              <!-- Melee Attack -->
+              <northSwingDeltaOffset>(0.05, 0.0, 0.5)</northSwingDeltaOffset>
+              <eastSwingDeltaOffset>(0.5, 0.0, -0.05)</eastSwingDeltaOffset>
+              <southSwingDeltaOffset>(0.05, 0.0, -0.5)</southSwingDeltaOffset>
+              <westSwingDeltaOffset>(-0.5, 0.0, -0.05)</westSwingDeltaOffset>
+              <northSwingAngleDeg>25</northSwingAngleDeg>
+              <eastSwingAngleDeg>55</eastSwingAngleDeg>
+              <southSwingAngleDeg>-25</southSwingAngleDeg>
+              <westSwingAngleDeg>55</westSwingAngleDeg>
+              <!-- Cast Ability -->
+              <northCastRaiseOffset>(0, 0, 0.5)</northCastRaiseOffset>
+              <eastCastRaiseOffset>(0, 0, 0.5)</eastCastRaiseOffset>
+              <southCastRaiseOffset>(0, 0, 0.5)</southCastRaiseOffset>
+              <westCastRaiseOffset>(0, 0, 0.5)</westCastRaiseOffset>
+              <northCastRaiseAngleDeg>90</northCastRaiseAngleDeg>
+              <eastCastRaiseAngleDeg>90</eastCastRaiseAngleDeg>
+              <southCastRaiseAngleDeg>-180</southCastRaiseAngleDeg>
+              <westCastRaiseAngleDeg>90</westCastRaiseAngleDeg>
+
+              <fallbackTint>(1, 1, 1, 1)</fallbackTint>
+            </li>
+          </children>
+        </li>
+        <li Class="PawnRenderNodeProperties_Carried">
+          <debugLabel>Weapon/carried thing</debugLabel>
+          <workerClass>PawnRenderNodeWorker_Carried</workerClass>
+        </li>
+      </children>
+    </root>
+  </PawnRenderTreeDef>
+
+</Defs>

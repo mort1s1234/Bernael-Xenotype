@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Defs>
+
 	<ThingDef ParentName="ArmorHelmetMakeableBase">
 		<defName>BX_Headgear_Warlock</defName>
 		<label>Warlock helmet</label>
 		<description>An imposing plasteel diadem that serves as both a protective helmet and a focus for the mind. Embedded in the center is a "soul-gem" - a grim piece of bio-tech said to be crystallized from the neural patterns of slain enemies. This gem doesn't just look intimidating; it actively siphons psychic heat away from the user, allowing for more frequent use of powerful abilities.</description>
 		<techLevel>Spacer</techLevel>
 		<researchPrerequisites>
-        <li>PoweredArmor</li>
-		<li MayRequire="VanillaExpanded.VPsycastsE">VPE_CasterGear</li>
+            <li>PoweredArmor</li>
+            <li MayRequire="VanillaExpanded.VPsycastsE">VPE_CasterGear</li>
 		</researchPrerequisites>
 		<tradeability>Sellable</tradeability>
 		<generateCommonality>0.25</generateCommonality>
@@ -57,11 +58,11 @@
 				<li>Overhead</li>
 			</layers>
 			<tags>
-				<li>SpacerMilitary</li>
+				<!-- <li>SpacerMilitary</li>
 				<li>Psychic</li>
-				<li>Warlock</li>
-				<li>Royal</li>
-				<li>RoyalTier6</li>
+				<li>Royal</li> -->
+				<li>RoyalTier7</li>
+				<li>BX_Warlock</li>
 			</tags>
 			<defaultOutfitTags>
 				<li>Soldier</li>
@@ -89,13 +90,12 @@
 					<only>(0.33,0.33,0.33,1)</only>
 				</li>
 				<li>
-					<weight>10</weight>
-					<only>(0.65,0.65,0.65,1)</only>
+					<weight>8</weight>
+					<only>(0.55,0.08,0.08,1)</only>
 				</li>
 				<li>
 					<weight>6</weight>
-					<min>(0.3,0.3,0.3,1)</min>
-					<max>(0.5,0.5,0.5,1)</max>
+					<only>(0.18,0.25,0.38,1)</only>
 				</li>
 			</options>
 		</colorGenerator>
@@ -106,8 +106,7 @@
 		</tradeTags>
 	</ThingDef>
 
-
-		<ThingDef ParentName="ApparelArmorPowerBase">
+	<ThingDef ParentName="ApparelArmorPowerBase">
 		<defName>BX_Apparel_Warlock</defName>
 		<label>warlock armor</label>
 		<description>A suit of advanced power armor worn by the Warlocks. The sleek, plasteel plating provides protection similar to standard reconnaissance armor, but the design is far more esoteric. High-tech eltex fibers are woven into the dark pauldrons and cape, acting as a massive resonator for psychic energy. While it offers excellent mobility, the armor’s primary purpose is to turn the wearer into a living conduit for psycasts.</description>
@@ -118,8 +117,8 @@
 		<uiIconScale>1</uiIconScale>
 		<techLevel>Spacer</techLevel>
 		<researchPrerequisites>
-        <li>PoweredArmor</li>
-		<li MayRequire="VanillaExpanded.VPsycastsE">VPE_CasterGear</li>
+            <li>PoweredArmor</li>
+            <li MayRequire="VanillaExpanded.VPsycastsE">VPE_CasterGear</li>
 		</researchPrerequisites>
 		<tradeability>Sellable</tradeability>
 		<generateCommonality>0.1</generateCommonality>
@@ -157,7 +156,7 @@
 			<li>RewardSpecial</li>
 		</thingSetMakerTags>
 		<apparel>
-			<bodyPartGroups>
+			<bodyPartGroups Inherit="False">
 				<li>Neck</li>
 				<li>Torso</li>
 				<li>Shoulders</li>
@@ -166,18 +165,14 @@
 			</bodyPartGroups>
 			<wornGraphicPath>Things/Apparel/Warlock/Warlock</wornGraphicPath>
 			<useWornGraphicMask>true</useWornGraphicMask>
-			<layers>
-				<li>Middle</li>
-				<li>Shell</li>
-			</layers>
 			<tags>
-				<li>SpacerMilitary</li>
+				<!-- <li>SpacerMilitary</li>
 				<li>Psychic</li>
-				<li>Warlock</li>
-				<li>Royal</li>
-				<li>RoyalTier6</li>
+				<li>Royal</li> -->
+				<li>RoyalTier7</li>
+				<li>BX_Warlock</li>
 			</tags>
-			<defaultOutfitTags>
+			<defaultOutfitTags Inherit="False">
 				<li>Soldier</li>
 			</defaultOutfitTags>
 			<useDeflectMetalEffect>true</useDeflectMetalEffect>
@@ -203,22 +198,20 @@
 					<only>(0.33,0.33,0.33,1)</only>
 				</li>
 				<li>
-					<weight>10</weight>
-					<only>(0.65,0.65,0.65)</only>
+					<weight>8</weight>
+					<only>(0.55,0.08,0.08,1)</only>
 				</li>
 				<li>
 					<weight>6</weight>
-					<min>(0.3,0.3,0.3)</min>
-					<max>(0.5,0.5,0.5)</max>
+					<only>(0.18,0.25,0.38,1)</only>
 				</li>
 			</options>
 		</colorGenerator>
-		<tradeTags>
+		<tradeTags Inherit="False">
 			<li>HiTechArmor</li>
 			<li>Armor</li>
 			<li>PsychicApparel</li>
 		</tradeTags>
 	</ThingDef>
-
 
 </Defs>

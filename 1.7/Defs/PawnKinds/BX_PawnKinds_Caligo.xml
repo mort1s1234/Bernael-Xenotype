@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <PawnKindDef Name="BX_CaligoBase" Abstract="True">
+    <race>Human</race>
+    <defaultFactionDef>BX_SovereignsCaligo</defaultFactionDef>
+    <initialWillRange>0~1</initialWillRange>
+    <initialResistanceRange>55~65</initialResistanceRange>
+    <styleItemTags MayRequire="Ludeon.RimWorld.Anomaly">
+      <li>
+        <tag>Cultist</tag>
+        <baseWeight>5</baseWeight>
+        <weightFactor>1</weightFactor>
+      </li>
+    </styleItemTags>
+    <requiredWorkTags>
+      <li>Violent</li>
+    </requiredWorkTags>
+    <apparelDisallowTags>
+      <li>Western</li>
+    </apparelDisallowTags>
+  </PawnKindDef>
+
+  <!-- 1. Vessels -->
+  <PawnKindDef ParentName="BX_CaligoBase">
+    <defName>BX_Caligo_Vessel</defName>
+    <label>vessel</label>
+    <combatPower>45</combatPower>
+    <isGoodPsychicRitualInvoker>false</isGoodPsychicRitualInvoker>
+    <studiableAsPrisoner>true</studiableAsPrisoner>
+    <initialWillRange>0~2</initialWillRange>
+    <initialResistanceRange>20~35</initialResistanceRange>
+    <apparelMoney>150~500</apparelMoney>
+    <apparelAllowHeadgearChance>0</apparelAllowHeadgearChance>
+    <apparelColor>(55, 55, 65)</apparelColor>
+    <apparelTags>
+      <li>IndustrialBasic</li>
+    </apparelTags>
+    <weaponMoney>80~180</weaponMoney>
+    <weaponTags>
+      <li>NeolithicMeleeBasic</li>
+      <li>MedievalMeleeDecent</li>
+    </weaponTags>
+    <specificApparelRequirements>
+      <li>
+        <apparelLayer>Shell</apparelLayer>
+        <stuff>Cloth</stuff>
+        <alternateTagChoices>
+          <li>
+            <tag>Robe</tag>
+            <chance>1</chance>
+          </li>
+        </alternateTagChoices>
+      </li>
+      <li>
+        <bodyPartGroup>Torso</bodyPartGroup>
+        <stuff>Cloth</stuff>
+      </li>
+    </specificApparelRequirements>
+    <useFactionXenotypes>false</useFactionXenotypes>
+    <xenotypeSet>
+      <xenotypeChances>
+        <Neanderthal MayRequire="Ludeon.RimWorld.Biotech">0.4</Neanderthal>
+        <Hussar MayRequire="Ludeon.RimWorld.Biotech">0.2</Hussar>
+      </xenotypeChances>
+    </xenotypeSet>
+  </PawnKindDef>
+
+  <!-- 2. Renegades Base (Mercenary-inspired) -->
+  <PawnKindDef Name="BX_Caligo_RenegadeBase" ParentName="BX_CaligoBase" Abstract="True">
+    <maxGenerationAge>65</maxGenerationAge>
+    <isGoodPsychicRitualInvoker>true</isGoodPsychicRitualInvoker>
+    <disallowedTraitsWithDegree>
+      <PsychicSensitivity>-1</PsychicSensitivity>
+    </disallowedTraitsWithDegree>
+    <chemicalAddictionChance>0.1</chemicalAddictionChance>
+    <combatEnhancingDrugsChance>0.15</combatEnhancingDrugsChance>
+    <combatEnhancingDrugsCount>0~2</combatEnhancingDrugsCount>
+    <invNutrition>2.55</invNutrition>
+    <itemQuality>Normal</itemQuality>
+    <gearHealthRange>0.7~3.2</gearHealthRange>
+    <apparelAllowHeadgearChance>0.5</apparelAllowHeadgearChance>
+    <apparelColor>(30, 55, 85)</apparelColor>
+    <apparelMoney>1000~1500</apparelMoney>
+    <apparelTags>
+      <li>IndustrialBasic</li>
+      <li>IndustrialAdvanced</li>
+      <li>IndustrialMilitaryBasic</li>
+      <li>IndustrialMilitaryAdvanced</li>
+      <li>BeltDefensePop</li>
+    </apparelTags>
+    <specificApparelRequirements>
+      <li>
+        <bodyPartGroup>Torso</bodyPartGroup>
+        <stuff>Cloth</stuff>
+        <alternateTagChoices>
+          <li>
+            <tag>Robe</tag>
+            <chance>0.7</chance>
+          </li>
+        </alternateTagChoices>
+      </li>
+      <li>
+        <bodyPartGroup>Legs</bodyPartGroup>
+        <stuff>Cloth</stuff>
+      </li>
+    </specificApparelRequirements>
+    <weaponMoney>330~650</weaponMoney>
+    <techHediffsChance>0.15</techHediffsChance>
+    <techHediffsMoney>700~1200</techHediffsMoney>
+    <techHediffsTags>
+      <li>Simple</li>
+      <li>Advanced</li>
+      <li>ImplantEmpireCommon</li>
+    </techHediffsTags>
+    <biocodeWeaponChance>0.2</biocodeWeaponChance>
+    <disallowedTraits>
+      <li>BodyPurist</li>
+    </disallowedTraits>
+    <inventoryOptions>
+      <skipChance>0.9</skipChance>
+      <subOptionsChooseOne>
+        <li>
+          <thingDef>MedicineIndustrial</thingDef>
+          <countRange>1</countRange>
+        </li>
+      </subOptionsChooseOne>
+    </inventoryOptions>
+  </PawnKindDef>
+
+  <!-- 2a. Imperial Deserter -->
+  <PawnKindDef ParentName="BX_Caligo_RenegadeBase">
+    <defName>BX_Caligo_Imperial_Deserter</defName>
+    <label>imperial deserter</label>
+    <combatPower>65</combatPower>
+    <backstoryFiltersOverride>
+      <li>
+        <categories>
+          <li>ImperialFighter</li>
+        </categories>
+      </li>
+    </backstoryFiltersOverride>
+    <weaponMoney>1100~2700</weaponMoney>
+    <weaponTags>
+      <li>IndustrialGunAdvanced</li>
+    </weaponTags>
+    <apparelMoney>7000~10000</apparelMoney>
+    <apparelAllowHeadgearChance>1.0</apparelAllowHeadgearChance>
+    <apparelRequired>
+      <li>Apparel_FlakJacket</li>
+      <li>Apparel_FlakVest</li>
+      <li>Apparel_FlakPants</li>
+    </apparelRequired>
+    <specificApparelRequirements>
+      <li>
+        <bodyPartGroup>UpperHead</bodyPartGroup>
+        <alternateTagChoices>
+          <li>
+            <tag>Gunlink</tag>
+            <chance>0.25</chance>
+          </li>
+        </alternateTagChoices>
+      </li>
+    </specificApparelRequirements>
+    <techHediffsChance>0.3</techHediffsChance>
+    <techHediffsMoney>1000~1500</techHediffsMoney>
+    <techHediffsTags>
+      <li>ImplantEmpireCommon</li>
+    </techHediffsTags>
+    <biocodeWeaponChance>0.15</biocodeWeaponChance>
+    <skills>
+      <li>
+        <skill>Shooting</skill>
+        <range>4~10</range>
+      </li>
+    </skills>
+    <disallowedTraits>
+      <li>Brawler</li>
+    </disallowedTraits>
+    <initialWillRange>2~4</initialWillRange>
+    <initialResistanceRange>15~24</initialResistanceRange>
+    <useFactionXenotypes>false</useFactionXenotypes>
+    <xenotypeSet>
+      <xenotypeChances>
+        <Neanderthal MayRequire="Ludeon.RimWorld.Biotech">0.03</Neanderthal>
+        <Hussar MayRequire="Ludeon.RimWorld.Biotech">0.25</Hussar>
+        <Genie MayRequire="Ludeon.RimWorld.Biotech">0.03</Genie>
+        <Starjack MayRequire="Ludeon.RimWorld.Biotech,Ludeon.RimWorld.Odyssey">0.03</Starjack>
+      </xenotypeChances>
+    </xenotypeSet>
+  </PawnKindDef>
+
+  <!-- 2b. Caligo Sniper -->
+  <PawnKindDef ParentName="BX_Caligo_RenegadeBase">
+    <defName>BX_Caligo_Sniper</defName>
+    <label>caligo sniper</label>
+    <combatPower>110</combatPower>
+    <backstoryFiltersOverride>
+      <li>
+        <categories>
+          <li>ImperialCommon</li>
+          <li>ImperialRoyal</li>
+        </categories>
+      </li>
+    </backstoryFiltersOverride>
+    <weaponMoney>600~600</weaponMoney>
+    <weaponTags>
+      <li>SniperRifle</li>
+    </weaponTags>
+    <apparelMoney>1000~1500</apparelMoney>
+    <apparelAllowHeadgearChance>0.5</apparelAllowHeadgearChance>
+    <skills>
+      <li>
+        <skill>Shooting</skill>
+        <range>8~16</range>
+      </li>
+    </skills>
+    <initialWillRange>2~4</initialWillRange>
+    <initialResistanceRange>13~20</initialResistanceRange>
+    <startingHediffs>
+      <li>
+        <def>PsychicAmplifier</def>
+      </li>
+    </startingHediffs>
+  </PawnKindDef>
+
+  <!-- 2c. Caligo Slasher -->
+  <PawnKindDef ParentName="BX_Caligo_RenegadeBase">
+    <defName>BX_Caligo_Slasher</defName>
+    <label>caligo slasher</label>
+    <combatPower>140</combatPower>
+    <canBeSapper>true</canBeSapper>
+    <backstoryFiltersOverride>
+      <li>
+        <categories>
+          <li>Outlander</li>
+          <li>Outsider</li>
+        </categories>
+      </li>
+    </backstoryFiltersOverride>
+    <weaponMoney>200~500</weaponMoney>
+    <weaponTags>
+      <li>MedievalMeleeDecent</li>
+      <li>MedievalMeleeAdvanced</li>
+    </weaponTags>
+    <apparelMoney>300~1400</apparelMoney>
+    <apparelAllowHeadgearChance>0</apparelAllowHeadgearChance>
+    <apparelRequired>
+      <li>Apparel_ShieldBelt</li>
+    </apparelRequired>
+    <skills>
+      <li>
+        <skill>Melee</skill>
+        <range>8~13</range>
+      </li>
+    </skills>
+    <combatEnhancingDrugsChance>0.05</combatEnhancingDrugsChance>
+    <combatEnhancingDrugsCount>0~2</combatEnhancingDrugsCount>
+    <initialWillRange>2~4</initialWillRange>
+    <initialResistanceRange>10~16</initialResistanceRange>
+    <useFactionXenotypes>false</useFactionXenotypes>
+    <xenotypeSet>
+      <xenotypeChances>
+        <Neanderthal MayRequire="Ludeon.RimWorld.Biotech">0.03</Neanderthal>
+        <Hussar MayRequire="Ludeon.RimWorld.Biotech">0.4</Hussar>
+        <Genie MayRequire="Ludeon.RimWorld.Biotech">0.03</Genie>
+      </xenotypeChances>
+    </xenotypeSet>
+  </PawnKindDef>
+
+  <!-- 2d. Caligo Heavy -->
+  <PawnKindDef ParentName="BX_Caligo_RenegadeBase">
+    <defName>BX_Caligo_Heavy</defName>
+    <label>caligo heavy</label>
+    <combatPower>140</combatPower>
+    <maxGenerationAge>65</maxGenerationAge>
+    <gearHealthRange>0.7~3.2</gearHealthRange>
+    <backstoryFiltersOverride>
+      <li>
+        <categories>
+          <li>ImperialFighter</li>
+          <li>Military</li>
+        </categories>
+      </li>
+    </backstoryFiltersOverride>
+    <weaponMoney>1200~1200</weaponMoney>
+    <weaponTags>
+      <li>GunHeavy</li>
+      <li>GunSingleUse</li>
+      <li>Flamethrower</li>
+    </weaponTags>
+    <apparelMoney>200~350</apparelMoney>
+    <apparelAllowHeadgearChance>0.5</apparelAllowHeadgearChance>
+    <apparelTags>
+      <li>IndustrialBasic</li>
+      <li>IndustrialAdvanced</li>
+      <li>IndustrialMilitaryBasic</li>
+      <li>IndustrialMilitaryAdvanced</li>
+      <li>BeltDefensePop</li>
+    </apparelTags>
+    <techHediffsChance>0.15</techHediffsChance>
+    <techHediffsMoney>700~1200</techHediffsMoney>
+    <techHediffsTags>
+      <li>Simple</li>
+      <li>Advanced</li>
+      <li>ImplantEmpireCommon</li>
+    </techHediffsTags>
+    <biocodeWeaponChance>0.2</biocodeWeaponChance>
+    <combatEnhancingDrugsChance>0.15</combatEnhancingDrugsChance>
+    <combatEnhancingDrugsCount>0~2</combatEnhancingDrugsCount>
+    <initialWillRange>2~4</initialWillRange>
+    <initialResistanceRange>14~23</initialResistanceRange>
+    <useFactionXenotypes>false</useFactionXenotypes>
+    <xenotypeSet>
+      <xenotypeChances>
+        <BX_Bernael MayRequire="Ludeon.RimWorld.Biotech">0.01</BX_Bernael>
+        <Neanderthal MayRequire="Ludeon.RimWorld.Biotech">0.03</Neanderthal>
+        <Hussar MayRequire="Ludeon.RimWorld.Biotech">0.4</Hussar>
+        <Genie MayRequire="Ludeon.RimWorld.Biotech">0.03</Genie>
+        <Starjack MayRequire="Ludeon.RimWorld.Biotech,Ludeon.RimWorld.Odyssey">0.03</Starjack>
+      </xenotypeChances>
+    </xenotypeSet>
+  </PawnKindDef>
+
+  <!-- 3. Warlocks -->
+  <PawnKindDef Name="BX_Caligo_Warlock" ParentName="BX_CaligoBase">
+    <defName>BX_Caligo_Warlock</defName>
+    <label>warlock</label>
+    <combatPower>165</combatPower>
+    <itemQuality>Excellent</itemQuality>
+    <isGoodPsychicRitualInvoker>true</isGoodPsychicRitualInvoker>
+    <disallowedTraitsWithDegree>
+      <PsychicSensitivity>-2</PsychicSensitivity>
+    </disallowedTraitsWithDegree>
+    <apparelMoney>7000~12000</apparelMoney>
+    <apparelAllowHeadgearChance>1</apparelAllowHeadgearChance>
+    <apparelColor>(114, 12, 12)</apparelColor>
+    <apparelTags>
+      <li>IndustrialBasic</li>
+      <li>IndustrialAdvanced</li>
+      <li>Psychic</li>
+      <li>SpacerMilitary</li>
+      <li>BX_Warlock</li>
+    </apparelTags>
+    <weaponMoney>3000~3500</weaponMoney>
+    <weaponTags>
+      <li>UltratechMelee</li>
+      <li>EltexStaff</li>
+      <li>BX_LifeVanquisher</li>
+      <li>BX_SoulLantern</li>
+    </weaponTags>
+    <specificApparelRequirements>
+      <li>
+        <bodyPartGroup>Torso</bodyPartGroup>
+        <stuff>Hyperweave</stuff>
+      </li>
+      <li>
+        <bodyPartGroup>Legs</bodyPartGroup>
+        <stuff>Hyperweave</stuff>
+      </li>
+    </specificApparelRequirements>
+    <techHediffsChance>0.33</techHediffsChance>
+    <techHediffsMoney>1000~4000</techHediffsMoney>
+    <techHediffsTags>
+      <li>Advanced</li>
+      <li>ImplantEmpireRoyal</li>
+      <li>ImplantEmpireCommon</li>
+    </techHediffsTags>
+    <techHediffsDisallowTags>
+      <li>PainCauser</li>
+    </techHediffsDisallowTags>
+    <inventoryOptions>
+      <subOptionsChooseOne>
+        <li>
+          <thingDef>BX_BottledSoul</thingDef>
+          <countRange>5</countRange>
+        </li>
+      </subOptionsChooseOne>
+    </inventoryOptions>
+    <initialWillRange>10~15</initialWillRange>
+    <initialResistanceRange>50~70</initialResistanceRange>
+    <useFactionXenotypes>false</useFactionXenotypes>
+    <xenotypeSet>
+      <xenotypeChances>
+        <BX_Bernael MayRequire="Ludeon.RimWorld.Biotech">0.03</BX_Bernael>
+      </xenotypeChances>
+    </xenotypeSet>
+    <disallowedTraits>
+      <li>Nudist</li>
+      <li>BodyPurist</li>
+    </disallowedTraits>
+    <startingHediffs>
+      <li>
+        <def>BX_GazeCaligoBuff</def>
+      </li>
+    </startingHediffs>
+  </PawnKindDef>
+
+  <!-- High Warlock / Master of the Fold -->
+  <PawnKindDef ParentName="BX_Caligo_Warlock">
+    <defName>BX_Caligo_HighWarlock</defName>
+    <label>high warlock</label>
+    <factionLeader>true</factionLeader>
+    <combatPower>210</combatPower>
+    <itemQuality>Masterwork</itemQuality>
+    <apparelMoney>9999999</apparelMoney>
+    <apparelAllowHeadgearChance>1</apparelAllowHeadgearChance>
+    <apparelRequired>
+      <li>BX_Apparel_Warlock</li>
+      <li>BX_Headgear_Warlock</li>
+    </apparelRequired>
+    <techHediffsChance>1</techHediffsChance>
+    <techHediffsMoney>3000~4000</techHediffsMoney>
+    <skills>
+      <li>
+        <skill>Shooting</skill>
+        <range>11~16</range>
+      </li>
+    </skills>
+    <initialWillRange>15~20</initialWillRange>
+    <initialResistanceRange>65~85</initialResistanceRange>
+    <useFactionXenotypes>false</useFactionXenotypes>
+    <xenotypeSet Inherit="False">
+      <xenotypeChances>
+        <BX_Bernael MayRequire="Ludeon.RimWorld.Biotech">1.0</BX_Bernael>
+      </xenotypeChances>
+    </xenotypeSet>
+    <startingHediffs>
+      <li>
+        <def>BX_PsychicOverchargeHediff</def>
+      </li>
+    </startingHediffs>
+  </PawnKindDef>
+
+</Defs>

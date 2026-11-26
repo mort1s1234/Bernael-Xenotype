@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <AbilityDef>
+    <defName>BX_FlamePillar_DarkDemon</defName>
+    <label>flame pillar</label>
+    <description>Spawn a flame pillar at a target to do damage.</description>
+    <cooldownTicksRange>2500</cooldownTicksRange>
+    <aiCanUse>true</aiCanUse>
+    <warmupSound>BX_Cast1</warmupSound>
+    <verbProperties>
+      <verbClass>Verb_CastAbility</verbClass>
+      <range>17.9</range>
+      <warmupTime>1.2</warmupTime>
+      <requireLineOfSight>true</requireLineOfSight>
+    </verbProperties>
+    <comps>
+      <li Class="Bernael_Xenotype.CompProperties_ShadowMire_FlamePillar">
+        <fieldDef>BX_ShadowMireField</fieldDef>
+      </li>
+    </comps>
+  </AbilityDef>
+
+</Defs>

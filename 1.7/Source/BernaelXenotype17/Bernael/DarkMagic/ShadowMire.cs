@@ -16,7 +16,7 @@ namespace Bernael_Xenotype
         public HediffDef slowDef;
     }
 
-    public sealed class CompProperties_ShadowMire : CompProperties_AbilityEffect
+    public class CompProperties_ShadowMire : CompProperties_AbilityEffect
     {
         public ShadowMireDef fieldDef;
 
@@ -27,17 +27,6 @@ namespace Bernael_Xenotype
     {
         private ShadowMireDef FieldDef => ((CompProperties_ShadowMire)props).fieldDef;
 
-        public override bool Valid(LocalTargetInfo target, bool throwMessages = false)
-        {
-            if (target.IsValid && !target.HasThing && parent.pawn.Spawned &&
-                ShadowMire.OpenGround(target.Cell, parent.pawn.Map)) return true;
-            if (throwMessages)
-                Messages.Message("BX_ShadowMireNeedsGround".Translate(), MessageTypeDefOf.RejectInput, false);
-            return false;
-        }
-
-        public override bool CanApplyOn(LocalTargetInfo target, LocalTargetInfo dest) => Valid(target);
-
         public override void Apply(LocalTargetInfo target, LocalTargetInfo dest)
         {
             if (!Valid(target, true)) return;
@@ -47,12 +36,23 @@ namespace Bernael_Xenotype
             GenSpawn.Spawn(mire, target.Cell, parent.pawn.Map);
         }
 
+        public override bool CanApplyOn(LocalTargetInfo target, LocalTargetInfo dest) => Valid(target);
+
         public override void DrawEffectPreview(LocalTargetInfo target)
         {
             if (!Valid(target)) return;
             Map map = parent.pawn.Map;
             GenDraw.DrawRadiusRing(target.Cell, FieldDef.radius, Color.white,
                 cell => ShadowMire.Reaches(target.Cell, cell, map));
+        }
+
+        public override bool Valid(LocalTargetInfo target, bool throwMessages = false)
+        {
+            if (target.IsValid && !target.HasThing && parent.pawn.Spawned &&
+                ShadowMire.OpenGround(target.Cell, parent.pawn.Map)) return true;
+            if (throwMessages)
+                Messages.Message("BX_ShadowMireNeedsGround".Translate(), MessageTypeDefOf.RejectInput, false);
+            return false;
         }
     }
 
@@ -63,7 +63,7 @@ namespace Bernael_Xenotype
         internal const int SecondPillarDelay = 16;
         private const int SlowRefreshTicks = 10;
 
-        internal Pawn caster;
+        public Pawn caster;
         private int age;
         private IntVec3 firstPillar = IntVec3.Invalid;
         private IntVec3 secondPillar = IntVec3.Invalid;
@@ -78,7 +78,7 @@ namespace Bernael_Xenotype
 
         internal static bool HasAir(IntVec3 cell, Map map) => cell.GetVacuum(map) < 0.5f;
 
-        internal static bool OpenGround(IntVec3 cell, Map map) =>
+        public static bool OpenGround(IntVec3 cell, Map map) =>
             cell.InBounds(map) && !cell.Fogged(map) && cell.Walkable(map) && cell.CanBeSeenOverFast(map) &&
             !cell.GetTerrain(map).IsWater && HasAir(cell, map);
 

@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <ThingDef ParentName="BasePawn">
+    <defName>BX_DarkDemon</defName>
+    <label>dark demon</label>
+    <description>A relentless entity bound by dark carapace plates and cold spectral energy, lashing out with flesh clubs in close combat.
+
+Creates a powerful cursed-fire explosion when killed.</description>
+    <statBases>
+      <MoveSpeed>2.0</MoveSpeed>
+      <ToxicResistance>1</ToxicResistance>
+	  <Flammability>0</Flammability>
+      <ComfyTemperatureMin>-100</ComfyTemperatureMin>
+      <ComfyTemperatureMax>250</ComfyTemperatureMax>
+      <PsychicSensitivity>2</PsychicSensitivity>
+      <!--<MinimumContainmentStrength>60</MinimumContainmentStrength>-->
+      <LeatherAmount>0</LeatherAmount>
+      <MeatAmount>0</MeatAmount>
+      <ArmorRating_Sharp>0.72</ArmorRating_Sharp>
+      <ArmorRating_Blunt>0.30</ArmorRating_Blunt>
+      <ArmorRating_Heat>2.00</ArmorRating_Heat>
+      <ToxicEnvironmentResistance>1</ToxicEnvironmentResistance>
+    </statBases>
+    <tradeability>None</tradeability>
+    <race>
+      <body>BX_DarkDemon</body>
+      <deathAction>
+        <workerClass>Bernael_Xenotype.DeathActionWorker_SmallCursedFlameExplosion</workerClass>
+      </deathAction>
+      <renderTree>BX_DarkDemonRenderTree</renderTree>
+      <thinkTreeMain>BX_DarkDemon</thinkTreeMain>
+      <thinkTreeConstant>BX_DarkDemonConstant</thinkTreeConstant>
+      <alwaysViolent>true</alwaysViolent>
+      <baseBodySize>2</baseBodySize>
+      <baseHealthScale>1.25</baseHealthScale>
+      <intelligence>ToolUser</intelligence>
+      <needsRest>false</needsRest>
+      <bloodDef>Filth_Ash</bloodDef>
+      <bleedRateFactor>0</bleedRateFactor>
+      <fleshType>Mechanoid</fleshType>
+      <isImmuneToInfections>true</isImmuneToInfections>
+      <!--<specificMeatDef>Meat_Twisted</specificMeatDef>
+      <leatherDef>Leather_Human</leatherDef>-->
+      <hasGenders>false</hasGenders>
+      <foodType>None</foodType>
+      <lifeExpectancy>2500</lifeExpectancy>
+      <soundMeleeHitPawn>Pawn_Melee_SmallScratch_HitPawn</soundMeleeHitPawn>
+      <soundMeleeHitBuilding>Pawn_Melee_SmallScratch_HitBuilding</soundMeleeHitBuilding>
+      <soundMeleeMiss>Pawn_Melee_SmallScratch_Miss</soundMeleeMiss>
+      <soundMeleeDodge>Pawn_MeleeDodge</soundMeleeDodge>
+      <disableIgniteVerb>true</disableIgniteVerb>
+      <trainability>None</trainability>
+      <canBecomeShambler>false</canBecomeShambler>
+      <lifeStageAges>
+        <li>
+          <def>MechanoidFullyFormed</def>
+          <soundWounded>Pawn_Mech_Centipede_Wounded</soundWounded>
+          <soundDeath>Pawn_Mech_Centipede_Death</soundDeath>
+          <soundCall>Pawn_Mech_Centipede_Call</soundCall>
+        </li>
+      </lifeStageAges>
+      <hediffGiverSets Inherit="False" />
+      <!--<hediffGiverSets>
+        <li>AnomalyEntity</li>
+      </hediffGiverSets>
+      <corpseHiddenWhileUndiscovered>true</corpseHiddenWhileUndiscovered>-->
+      <canFlyInVacuum>true</canFlyInVacuum>
+    </race>
+    <butcherProducts>
+      <Steel>30</Steel>
+      <Plasteel>10</Plasteel>
+    </butcherProducts>
+    <!--<comps>
+      <li Class="CompProperties_HoldingPlatformTarget">
+        <baseEscapeIntervalMtbDays>60</baseEscapeIntervalMtbDays>
+      </li>
+      <li Class="CompProperties_AttachPoints">
+        <points>
+          <li>
+            <offset>(-.4, 0, .4)</offset>
+            <type>PlatformRestraint0</type>
+          </li>
+          <li>
+            <offset>(.4, 0, .5)</offset>
+            <type>PlatformRestraint1</type>
+          </li>
+          <li>
+            <offset>(.3, 0, -.6)</offset>
+            <type>PlatformRestraint2</type>
+          </li>
+          <li>
+            <offset>(-.2, 0, -.7)</offset>
+            <type>PlatformRestraint3</type>
+          </li>
+        </points>
+      </li>
+      <li Class="CompProperties_ProducesBioferrite">
+        <bioferriteDensity>1.5</bioferriteDensity>
+      </li>
+      <li Class="CompProperties_Studiable">
+        <frequencyTicks>120000</frequencyTicks>
+        <knowledgeCategory>Basic</knowledgeCategory>
+        <minMonolithLevelForStudy>1</minMonolithLevelForStudy>
+        <anomalyKnowledge>2</anomalyKnowledge>
+        <requiresHoldingPlatform>true</requiresHoldingPlatform>
+      </li>
+    </comps>-->
+    <tools>
+      <li>
+        <label>left spectral claw</label>
+        <labelNoLocation>spectral claw</labelNoLocation>
+        <capacities>
+          <li>BX_CursedFlame</li>
+        </capacities>
+        <power>20</power>
+        <cooldownTime>3</cooldownTime>
+        <linkedBodyPartsGroup>LeftBlade</linkedBodyPartsGroup>
+        <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+      </li>
+      <li>
+        <label>right spectral claw</label>
+        <labelNoLocation>spectral claw</labelNoLocation>
+        <capacities>
+          <li>BX_CursedFlame</li>
+        </capacities>
+        <power>20</power>
+        <cooldownTime>3</cooldownTime>
+        <linkedBodyPartsGroup>RightBlade</linkedBodyPartsGroup>
+        <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+      </li>
+      <li>
+        <label>head</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>8</power>
+        <cooldownTime>2</cooldownTime>
+        <linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+        <ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+        <chanceFactor>0.1</chanceFactor>
+      </li>
+    </tools>
+  </ThingDef>
+
+  <PawnKindDef Name="BX_DarkDemon">
+    <defName>BX_DarkDemon</defName>
+    <label>dark demon</label>
+    <race>BX_DarkDemon</race>
+    <defaultFactionDef>BX_SovereignsCaligo</defaultFactionDef>
+    <immuneToGameConditionEffects>true</immuneToGameConditionEffects>
+    <!--<overrideDebugActionCategory>Entity</overrideDebugActionCategory>
+    <alternateGraphicChance>0.833</alternateGraphicChance>-->
+    <lifeStages>
+      <li>
+        <bodyGraphicData>
+          <texPath>Things/Pawn/DarkDemon/DarkDemon</texPath>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>2</drawSize>
+        </bodyGraphicData><corpseGraphicData>
+          <texPath>Things/Pawn/DarkDemon/Corpse_DarkDemon</texPath>
+          <graphicClass>Graphic_Single</graphicClass>
+          <drawSize>2</drawSize>
+        </corpseGraphicData>
+      </li>
+    </lifeStages>
+    <combatPower>400</combatPower>
+    <abilities>
+      <li>BX_FlamePillar_DarkDemon</li>
+    </abilities>
+  </PawnKindDef>
+
+</Defs>
