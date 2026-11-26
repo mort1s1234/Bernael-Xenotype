@@ -12,8 +12,7 @@ draft "Traveler"
 select "Traveler"
 gizmo "Traverse the fold" expect=disabled
 gizmo "Fold shift" expect=allowed
-tick 45 note="allow the self-shift cast to finish"
-assert pawn "Traveler" hediff=BX_FoldShift_Hediff expect=present
+waitfor pawn "Traveler" hediff=BX_FoldShift_Hediff expect=present ticks=45
 select "Traveler"
 gizmo "Traverse the fold" expect=allowed
 target cell=0,0 expect=allowed

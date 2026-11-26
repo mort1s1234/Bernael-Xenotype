@@ -46,7 +46,6 @@ gizmo "Wing burst" expect=allowed
 despawn Thing:Fire at 18,4
 assert log clean
 
-requires assert=hitchance
 speed paused
 weather Clear
 spawn Pawn:Pirate at 14,7 name="Raider" faction=enemy pacify=true gear=none

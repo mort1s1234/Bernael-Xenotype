@@ -14,8 +14,6 @@ research VPE_CasterGear done=true
 workbill "Bench" recipe=Make_BX_LifeVanquisher count=1
 assert log clean
 
-requires verb=vefability
-requires assert=vefability
 spawn Pawn:Colonist at 0,0 name="Reacher" xenotype=BX_Bernael
 spawn Pawn:Colonist at 2,0 name="Plain"
 vefability "Reacher" grant=VPE_Flameball

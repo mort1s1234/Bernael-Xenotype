@@ -118,7 +118,6 @@ undraft "Slayer"
 assert log clean
 
 requires dlc=Royalty
-requires assert=psyfocus
 spawn Pawn:Colonist at 0,26 name="Reaper" gear=none age=30
 spawn Thing:BX_LifeVanquisher at 1,26 name="Reaper's sword" quality=normal
 equip "Reaper" thing="Reaper's sword" now=true

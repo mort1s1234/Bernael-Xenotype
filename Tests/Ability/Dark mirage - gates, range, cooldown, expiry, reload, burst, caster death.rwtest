@@ -121,9 +121,8 @@ pacify "Beside Owner"
 pacify "Beside Keeper"
 
 damage "Owner" amount=999
-tick 10 note="caster death block: TickInterval reads the caster every tick"
+waitfor thing BX_DarkMirageDecoy at 4,14 expect=absent ticks=10
 
-assert thing BX_DarkMirageDecoy at 4,14 expect=absent
 assert pawn "Beside Owner" hediff=Frostbite expect=absent
 
 assert thing BX_DarkMirageDecoy at 10,14 expect=present

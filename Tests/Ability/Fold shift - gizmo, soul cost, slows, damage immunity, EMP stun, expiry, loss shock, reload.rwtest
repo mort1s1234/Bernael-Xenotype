@@ -75,7 +75,6 @@ assert pawn "Saver" hediff=BX_FoldShift_Hediff expect=absent
 assert pawn "Saver" hediff=XenogermLossShock expect=present
 assert log clean
 
-requires assert=pathcost
 sky glow=1
 terrain Mud at 1,12
 terrain Soil at -1,12
@@ -93,8 +92,7 @@ give "Wader" resource=BX_SoulEater value=0.9
 draft "Wader"
 select "Wader"
 gizmo "Fold shift" expect=allowed
-tick 60 note="path cost block: the cast lands as in the cast block"
-assert pawn "Wader" hediff=BX_FoldShift_Hediff expect=present
+waitfor pawn "Wader" hediff=BX_FoldShift_Hediff expect=present ticks=60
 assert pathcost "Walker" at -1,14 min=13 max=17
 assert pathcost "Walker" at 1,14 min=25 max=29
 assert pathcost "Wader" at -1,12 min=60 max=70

@@ -30,9 +30,8 @@ assert pawn "Adept" capacity=Consciousness min=1.12 max=1.18 expect=present
 assert pawn "Mundane" capacity=Consciousness min=0.77 max=0.83 expect=present
 ask "caligo-eye" ticks=120 claim="a huge dark pupil hangs over the map inside a pale blue glow, the whole map is tinted blue, and the pupil is round, not a square or a pink texture"
 
-tick 400 note="end block: the 3600 ticks of the condition run out and End fires the outcome incident"
+waitfor condition BX_GazeCaligo expect=absent ticks=400
 rand off
-assert condition BX_GazeCaligo expect=absent
 assert letter contains "Psychic burnout" expect=present
 assert pawn "Adept" hediff=PsychicShock expect=present
 assert pawn "Mundane" hediff=PsychicShock expect=absent
